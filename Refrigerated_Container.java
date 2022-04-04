@@ -1,8 +1,8 @@
 public class Refrigerated_Container extends Heavy_Container{
 
-    public Refrigerated_Container()
+    public Refrigerated_Container(Ship chosenShip)
     {
-        super();
+        super(chosenShip);
 
         this.container_type = "Refrigerated_Container";
     }

@@ -18,7 +18,7 @@ public class Ship {
     private static int ship_ID= 0;
    static ArrayList<Ship> ships = new ArrayList<>();
 
-    ArrayList<Standard_Container> containers;
+   ArrayList<Standard_Container> containers;
 
     public Ship()
     {
@@ -72,6 +72,18 @@ public class Ship {
         this.max_electro = max_electro;
     }
 
+
+
+    public static void contentsOfShip()
+    {
+        Ship tmp = Ship.ships.get(0);
+        for(Standard_Container cont : tmp.containers)
+        {
+            System.out.println(cont.toString());
+            System.out.println("\n");
+        }
+
+    }
 
     /*Write an application that will be used to manage the logistics of a seaport in terms of a
 transhipment terminal for container ships. The application will be used to unload and load containers

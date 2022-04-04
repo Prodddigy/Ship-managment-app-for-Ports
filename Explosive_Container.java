@@ -1,8 +1,8 @@
 public class Explosive_Container extends Standard_Container{
 
-    public Explosive_Container()
+    public Explosive_Container(Ship chosenShip)
     {
-        super();
+        super(chosenShip);
 
         this.container_type = "Heavy_Container";
     }

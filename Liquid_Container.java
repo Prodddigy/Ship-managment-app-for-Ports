@@ -1,8 +1,8 @@
 public class Liquid_Container extends Standard_Container implements Liquidable_Container{
 
-    public Liquid_Container()
+    public Liquid_Container(Ship chosenShip)
     {
-        super();
+        super(chosenShip);
         this.container_type = "Liquid_Container";
     }
 

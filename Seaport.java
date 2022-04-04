@@ -72,9 +72,9 @@ public class Seaport {
         if( compareShip(shipName))
         {
             System.out.println("add containers to this :"+shipName);
-
-          //  container_menu();
+            container_menu(findShip(shipName));
         }
+
         else
         {
             System.out.println("Sorry, name not found");
@@ -83,6 +83,18 @@ public class Seaport {
 
 
     }
+    public static Ship findShip(String shipName) {
+
+        for (int i = 0; i < Ship.ships.size(); i++) {
+
+            if(Objects.equals(shipName, Ship.ships.get(i).name))
+            {
+                return Ship.ships.get(i);
+            }
+        }
+        return null;
+    }
+
 
     public static boolean compareShip(String shipName) {
 
@@ -101,7 +113,7 @@ public class Seaport {
 
 
 
-    public static void container_menu() {
+    public static void container_menu(Ship chosenShip) {
 
         Scanner scan2 = new Scanner(System.in);
 
@@ -118,38 +130,32 @@ public class Seaport {
 
         switch (container_type) {
             case 1:
-                new Standard_Container();
-
+                new Standard_Container(chosenShip);
                 break;
 
             case 2:
-                new Heavy_Container();
+                new Heavy_Container(chosenShip);
                 break;
-
 
             case 3:
-                new Refrigerated_Container() ;
+                new Refrigerated_Container(chosenShip) ;
                 break;
-
 
             case 4:
-                new Liquid_Container();
+                new Liquid_Container(chosenShip);
                 break;
 
-
             case 5:
-                new Toxic_Liquid_Container();
+                new Toxic_Liquid_Container(chosenShip);
                 break;
 
             case 6:
-                new Toxic_Powder();
+                new Toxic_Powder(chosenShip);
                 break;
-
 
             case 7:
-                new Explosive_Container();
+                new Explosive_Container(chosenShip);
                 break;
-
 
             default:
                 System.out.println("Please choose type :)");

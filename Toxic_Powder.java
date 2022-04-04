@@ -1,8 +1,8 @@
 public class Toxic_Powder extends Heavy_Container{
 
-    Toxic_Powder()
+    Toxic_Powder(Ship chosenShip)
     {
-        super();
+        super(chosenShip);
         this.container_type = "Toxic_Powder_Container";
     }
 

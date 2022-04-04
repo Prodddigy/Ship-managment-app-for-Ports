@@ -1,8 +1,8 @@
 public class Toxic_Liquid_Container extends Heavy_Container implements Liquidable_Container{
 
-    public Toxic_Liquid_Container()
+    public Toxic_Liquid_Container(Ship chosenShip)
     {
-        super();
+        super(chosenShip);
         constructor();
         this.container_type = "Toxic_Liquid";
 

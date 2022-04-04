@@ -34,10 +34,10 @@ public class Standard_Container {
 
     static int num_containers=0;
 
-    static ArrayList<Standard_Container> containers ;
+   // static ArrayList<Standard_Container> containers ;
 
 
-    public Standard_Container() {
+    public Standard_Container(Ship chosenShip) {
 
         Scanner scan3 = new Scanner(System.in);
 
@@ -47,7 +47,7 @@ public class Standard_Container {
         this.sender_info = sender_info;
 
 
-        System.out.println("What's the name of the information about security?");
+        System.out.println("What's the information about security?");
         String secure_info = scan3.nextLine();
 
         this.secure_info = secure_info;
@@ -76,7 +76,7 @@ public class Standard_Container {
 
         num_containers++;
 
-        containers.add(this);
+        chosenShip.containers.add(this);
 
     }
 

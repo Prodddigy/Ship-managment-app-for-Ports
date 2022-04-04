@@ -31,6 +31,17 @@ public class Main {
         ship3.setHome_port("Calagari"); ship3.setDestination("Poland"); ship3.setMax_tox_or_exp(3);
         ship3.setTransport_origin("Calagari");
 
+        System.out.println("Standard test \n" );
+        Standard_Container cont1 = new Standard_Container(ship1);
+
+        System.out.println("Explosive test \n");
+        Explosive_Container cont2 = new Explosive_Container(ship1);
+        System.out.println("toxic liquid test \n");
+
+        Toxic_Liquid_Container cont3 = new Toxic_Liquid_Container(ship1);
+
+
+
         Scanner scan = new Scanner(System.in);
 
         boolean loop = true;
@@ -62,7 +73,7 @@ public class Main {
                 }
 
                 case 3: {
-                    System.out.println(Standard_Container.containers.get(0).toString());
+                    Ship.contentsOfShip();
 
                     break;
                 }

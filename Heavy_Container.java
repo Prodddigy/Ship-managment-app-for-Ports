@@ -4,9 +4,10 @@ public class Heavy_Container extends Standard_Container{
 //• heavy container, which is a type of standard container,
 
 
-    public Heavy_Container()
+    public Heavy_Container(Ship chosenShip)
     {
-        super();
+
+        super(chosenShip);
         this.container_type = "Heavy_Container";
 
 
