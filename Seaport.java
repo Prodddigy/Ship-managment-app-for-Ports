@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Seaport {
@@ -55,15 +56,59 @@ public class Seaport {
 
     }
 
+    public static void whichShip()
+    {
+        System.out.println("Which Ship ?: ");
+        System.out.println("\n");
+        for (Ship obj : Ship.ships)
+        {
+            System.out.println( "Name: "+obj.name+"\n");
+
+        }
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Type the name of it: ");
+        String shipName = scan.nextLine();
+        if( compareShip(shipName))
+        {
+            System.out.println("add containers to this :"+shipName);
+
+          //  container_menu();
+        }
+        else
+        {
+            System.out.println("Sorry, name not found");
+
+        }
+
+
+    }
+
+    public static boolean compareShip(String shipName) {
+
+        boolean compare = false;
+        for (int i = 0; i < Ship.ships.size(); i++)
+        {
+            if (Objects.equals(shipName, Ship.ships.get(i).name))
+            {
+                compare = true;
+                break;
+            }
+
+        }
+        return compare;
+    }
+
+
 
     public static void container_menu() {
 
         Scanner scan2 = new Scanner(System.in);
 
         System.out.println("What's the container type?");
-        System.out.println("1. Standard");
-        System.out.println("2. Heavy");
-        System.out.println("3. Refrigerated");
+        System.out.println("1. Standard cargo");
+        System.out.println("2. Heavy cargo");
+        System.out.println("3. Refrigerated cargo");
         System.out.println("4. Liquids cargo");
         System.out.println("5. Toxic Liquid cargo");
         System.out.println("6. Toxic Powder cargo");

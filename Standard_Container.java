@@ -31,9 +31,10 @@ public class Standard_Container {
     int container_ID;
 
     String container_type;
+
     static int num_containers=0;
 
-    static ArrayList<Standard_Container> containers = new ArrayList<>();
+    static ArrayList<Standard_Container> containers ;
 
 
     public Standard_Container() {
@@ -77,6 +78,18 @@ public class Standard_Container {
 
         containers.add(this);
 
+    }
+
+    public String toString()
+    {
+        return "Type: "+ this.container_type+
+                " Sender info: "+ this.sender_info+
+                " Security info: "+ this.secure_info+
+                " Certificate: "+ this.certificate+
+                " Gross weight: "+ this.brutto_weight+
+                " Tare weight: "+ this.tare_weight+
+                " Net Weight: "+ this.nettoweight+
+                " Container ID: "+ this.container_ID;
     }
 
 }
