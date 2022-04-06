@@ -70,7 +70,7 @@ public class Standard_Container {
 
         this.nettoweight = brutto_weight-tare_weight;
 
-        this.container_type = "Standard";
+        this.container_type = "Standard Cargo";
 
         this.container_ID = (int) (Math.random() * 9999 + 1000);
 
@@ -82,13 +82,13 @@ public class Standard_Container {
 
     public String toString()
     {
-        return "Type: "+ this.container_type+
-                " Sender info: "+ this.sender_info+
-                " Security info: "+ this.secure_info+
-                " Certificate: "+ this.certificate+
-                " Gross weight: "+ this.brutto_weight+
-                " Tare weight: "+ this.tare_weight+
-                " Net Weight: "+ this.nettoweight+
+        return "Type: "+ this.container_type+","+
+                " Sender info: "+ this.sender_info+","+
+                " Security info: "+ this.secure_info+","+
+                " Certificate: "+ this.certificate+","+
+                " Gross weight: "+ this.brutto_weight+","+
+                " Tare weight: "+ this.tare_weight+","+
+                " Net Weight: "+ this.nettoweight+","+
                 " Container ID: "+ this.container_ID;
     }
 

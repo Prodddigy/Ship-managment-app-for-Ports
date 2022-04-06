@@ -72,11 +72,39 @@ public class Ship {
         this.max_electro = max_electro;
     }
 
-
-
-    public static void contentsOfShip()
+    public static void whichShipShow()
     {
-        Ship tmp = Ship.ships.get(0);
+        System.out.println("Which Ship you want to see ?: \n");
+
+        for (Ship obj : Ship.ships)
+        {
+            System.out.println( "Name: "+obj.name+"\n");
+
+        }
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Type the name of it: ");
+
+        String shipName = scan.nextLine();
+
+        if( Seaport.compareShip(shipName))
+        {
+            System.out.println("display contents of ship:"+shipName);
+            contentsOfShip(Seaport.findShip(shipName));
+        }
+
+        else
+        {
+            System.out.println("Sorry, name not found");
+
+        }
+
+
+    }
+
+    public static void contentsOfShip(Ship ship)
+    {
+        Ship tmp = ship;
         for(Standard_Container cont : tmp.containers)
         {
             System.out.println(cont.toString());

@@ -50,7 +50,7 @@ public class Main {
             System.out.println("1 2 3 4");
             System.out.println("1. Create a ship");
             System.out.println("2. Create container");
-            System.out.println("3. Show container");
+            System.out.println("3. Show containers from a certain Ship");
             System.out.println("4. Quit");
             int menu = scan.nextInt();
 
@@ -73,7 +73,7 @@ public class Main {
                 }
 
                 case 3: {
-                    Ship.contentsOfShip();
+                    Ship.whichShipShow();
 
                     break;
                 }
