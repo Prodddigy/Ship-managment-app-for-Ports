@@ -15,7 +15,17 @@ public class Ship {
     int max_heavy;
     int max_electro;
 
-    private static int ship_ID= 0;
+    int MAX_CAPACITY_counter;
+    int MAX_WEIGHT_counter;
+
+    int max_tox_or_exp_counter;
+    int max_heavy_counter;
+    int max_electro_counter;
+
+
+
+    int ship_ID= 0;
+   static  int ship_counter=0;
    static ArrayList<Ship> ships = new ArrayList<>();
 
    ArrayList<Standard_Container> containers;
@@ -23,7 +33,7 @@ public class Ship {
     public Ship()
     {
 
-        this.ship_ID = (int) (Math.random()*9999+1000);
+        this.ship_ID =ship_counter++;
 
          this.containers = new ArrayList<>();
 
@@ -32,7 +42,7 @@ public class Ship {
     }//data structures SET
 
 
-    public static int getShip_ID() {
+    public  int getShip_ID() {
         return ship_ID;
     }
 
@@ -79,6 +89,7 @@ public class Ship {
         for (Ship obj : Ship.ships)
         {
             System.out.println( "Name: "+obj.name+"\n");
+            System.out.println("ID: "+obj.getShip_ID()+"\n");
 
         }
         Scanner scan = new Scanner(System.in);

@@ -37,6 +37,7 @@ public class Standard_Container {
    // static ArrayList<Standard_Container> containers ;
 
 
+
     public Standard_Container(Ship chosenShip) {
 
         Scanner scan3 = new Scanner(System.in);
@@ -72,9 +73,11 @@ public class Standard_Container {
 
         this.container_type = "Standard Cargo";
 
-        this.container_ID = (int) (Math.random() * 9999 + 1000);
+        this.container_ID =num_containers++;
 
-        num_containers++;
+
+       // if()
+        //int a = chosenShip.MAX_CAPACITY;
 
         chosenShip.containers.add(this);
 
