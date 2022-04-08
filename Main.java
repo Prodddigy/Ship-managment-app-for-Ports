@@ -30,7 +30,7 @@ public class Main {
         ship3.setMAX_WEIGHT(50); ship3.setMAX_CAPACITY(7);
         ship3.setHome_port("Calagari"); ship3.setDestination("Poland"); ship3.setMax_tox_or_exp(3);
         ship3.setTransport_origin("Calagari");
-
+/*
         System.out.println("Standard test \n" );
         Standard_Container cont1 = new Standard_Container(ship1);
 
@@ -40,6 +40,8 @@ public class Main {
 
         Toxic_Liquid_Container cont3 = new Toxic_Liquid_Container(ship1);
 
+
+ */
 
 
         Scanner scan = new Scanner(System.in);

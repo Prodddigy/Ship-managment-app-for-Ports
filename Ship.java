@@ -11,16 +11,16 @@ public class Ship {
     int MAX_CAPACITY;
     int MAX_WEIGHT;
 
-    int max_tox_or_exp;
+    int max_tox_or_exp=3;
     int max_heavy;
     int max_electro;
 
-    int MAX_CAPACITY_counter;
-    int MAX_WEIGHT_counter;
+    int MAX_CAPACITY_counter=0;
+    int MAX_WEIGHT_counter=0;
 
-    int max_tox_or_exp_counter;
-    int max_heavy_counter;
-    int max_electro_counter;
+    int max_tox_or_exp_counter=0;
+    int max_heavy_counter=0;
+    int max_electro_counter=0;
 
 
 
@@ -41,6 +41,25 @@ public class Ship {
 
     }//data structures SET
 
+    public void setMAX_CAPACITY_counter(int MAX_CAPACITY_counter) {
+        this.MAX_CAPACITY_counter = MAX_CAPACITY_counter;
+    }
+
+    public void setMAX_WEIGHT_counter(int MAX_WEIGHT_counter) {
+        this.MAX_WEIGHT_counter = MAX_WEIGHT_counter;
+    }
+
+    public void setMax_tox_or_exp_counter(int max_tox_or_exp_counter) {
+        this.max_tox_or_exp_counter = max_tox_or_exp_counter;
+    }
+
+    public void setMax_heavy_counter(int max_heavy_counter) {
+        this.max_heavy_counter = max_heavy_counter;
+    }
+
+    public void setMax_electro_counter(int max_electro_counter) {
+        this.max_electro_counter = max_electro_counter;
+    }
 
     public  int getShip_ID() {
         return ship_ID;
@@ -88,9 +107,15 @@ public class Ship {
 
         for (Ship obj : Ship.ships)
         {
+            System.out.println("-------------------------------");
             System.out.println( "Name: "+obj.name+"\n");
             System.out.println("ID: "+obj.getShip_ID()+"\n");
-
+            System.out.println("Heavy max: "+obj.max_heavy_counter+"/"+obj.max_heavy+"\n");
+            System.out.println("Electric Max: "+obj.max_electro_counter+"/"+obj.max_electro+"\n");
+            System.out.println("Toxic/Exp: "+obj.max_tox_or_exp_counter+"/"+obj.max_tox_or_exp+"\n");
+            System.out.println("Weight: "+obj.MAX_WEIGHT_counter+"/"+obj.MAX_WEIGHT+"\n");
+            System.out.println("Capacity: "+obj.MAX_CAPACITY_counter+"/"+obj.MAX_CAPACITY+"\n");
+            System.out.println("-------------------------------");
         }
         Scanner scan = new Scanner(System.in);
 

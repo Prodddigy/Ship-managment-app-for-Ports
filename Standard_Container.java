@@ -38,7 +38,7 @@ public class Standard_Container {
 
 
 
-    public Standard_Container(Ship chosenShip) {
+    public Standard_Container(Ship chosenShip,String check) {
 
         Scanner scan3 = new Scanner(System.in);
 
@@ -62,24 +62,51 @@ public class Standard_Container {
         System.out.println("What's the brutto weight?");
         int brutto_weight = scan3.nextInt();
 
-        this.brutto_weight = brutto_weight;
+        if(chosenShip.MAX_WEIGHT >= brutto_weight + chosenShip.MAX_WEIGHT_counter
+                && chosenShip.MAX_CAPACITY >= 1 + chosenShip.MAX_CAPACITY_counter)
+        {
+            this.brutto_weight = brutto_weight;
 
-        System.out.println("What's the tare weight?");
-        int tare_weight = scan3.nextInt();
+            System.out.println("What's the tare weight?");
+            int tare_weight = scan3.nextInt();
 
-        this.tare_weight = tare_weight;
+            this.tare_weight = tare_weight;
 
-        this.nettoweight = brutto_weight-tare_weight;
+            this.nettoweight = brutto_weight-tare_weight;
 
-        this.container_type = "Standard Cargo";
+            this.container_type = "Standard Cargo";
 
-        this.container_ID =num_containers++;
+            this.container_ID =num_containers++;
 
+            chosenShip.containers.add(this);
+        }
+        else
+        {
 
-       // if()
-        //int a = chosenShip.MAX_CAPACITY;
+            System.out.println("sorry too heavy or too many containers already");
 
-        chosenShip.containers.add(this);
+        }
+
+        if(check == "Standard_Container")
+        {
+            chosenShip.MAX_CAPACITY_counter += 1;
+            chosenShip.MAX_WEIGHT_counter += this.brutto_weight;
+        }
+
+        /*
+        if(chosenShip.MAX_CAPACITY >= 1+ chosenShip.MAX_CAPACITY_counter
+        && chosenShip.MAX_WEIGHT >= this.brutto_weight+ chosenShip.MAX_CAPACITY_counter
+        && chosenShip.max_heavy >= 1+ chosenShip.max_heavy_counter
+        && chosenShip.max_electro >= 1+ chosenShip.max_electro_counter
+        && chosenShip.max_tox_or_exp >= 1+ chosenShip.max_tox_or_exp_counter
+        )
+        {
+
+            chosenShip.containers.add(this);
+        }
+        else
+            System.out.println("dont add");
+*/
 
     }
 

@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class Seaport {
 
+
+    static String checkType;
     public static void Ship_Maker(Ship obj )
     {
 
@@ -38,10 +40,6 @@ public class Seaport {
 
         obj.setMAX_WEIGHT(MAX_WEIGHT);
 
-        System.out.println("What's the maximum capacity for toxic and explosive containers on ship?");
-        int max_tox_or_exp = scan.nextInt();
-
-        obj.setMax_tox_or_exp(max_tox_or_exp);
 
         System.out.println("What's the maximum capacity for Heavy containers on ship?");
         int max_heavy = scan.nextInt();
@@ -129,32 +127,42 @@ public class Seaport {
         int container_type = scan2.nextInt();
 
         switch (container_type) {
-            case 1:
-                new Standard_Container(chosenShip);
+            case 1: {
+
+
+                checkType ="Standard_Container";
+                new Standard_Container(chosenShip,checkType);
                 break;
+            }
 
             case 2:
-                new Heavy_Container(chosenShip);
+                checkType ="Heavy_Container";
+                new Heavy_Container(chosenShip,checkType);
                 break;
 
             case 3:
-                new Refrigerated_Container(chosenShip) ;
+                checkType ="Refrigerated_Container";
+                new Refrigerated_Container(chosenShip,checkType) ;
                 break;
 
             case 4:
-                new Liquid_Container(chosenShip);
+                checkType ="Liquid_Container";
+                new Liquid_Container(chosenShip,checkType);
                 break;
 
             case 5:
-                new Toxic_Liquid_Container(chosenShip);
+                checkType ="Toxic_Liquid_Container";
+                new Toxic_Liquid_Container(chosenShip,checkType);
                 break;
 
             case 6:
-                new Toxic_Powder(chosenShip);
+                checkType ="Toxic_Powder";
+                new Toxic_Powder(chosenShip,checkType);
                 break;
 
             case 7:
-                new Explosive_Container(chosenShip);
+                checkType ="Explosive_Container";
+                new Explosive_Container(chosenShip,checkType);
                 break;
 
             default:

@@ -1,11 +1,24 @@
 public class Toxic_Liquid_Container extends Heavy_Container implements Liquidable_Container{
 
-    public Toxic_Liquid_Container(Ship chosenShip)
+    public Toxic_Liquid_Container(Ship chosenShip, String check)
     {
-        super(chosenShip);
+        super(chosenShip,check);
         constructor();
         this.container_type = "Toxic_Liquid";
-
+        if(check == "Toxic_Liquid_Container")
+        {
+            if(chosenShip.max_tox_or_exp < 1+ chosenShip.max_tox_or_exp_counter)
+            {
+                chosenShip.containers.remove(this);
+                System.out.println("Can't add, limit reached");
+            }
+            else
+            {
+                chosenShip.max_tox_or_exp_counter++;
+                chosenShip.MAX_WEIGHT_counter += this.brutto_weight;
+                chosenShip.MAX_CAPACITY_counter += 1;
+            }
+        }
     }
 
     public String toString()

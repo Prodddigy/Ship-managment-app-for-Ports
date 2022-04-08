@@ -1,10 +1,25 @@
 public class Explosive_Container extends Standard_Container{
 
-    public Explosive_Container(Ship chosenShip)
+    public Explosive_Container(Ship chosenShip, String check)
     {
-        super(chosenShip);
+        super(chosenShip,check);
 
-        this.container_type = "Heavy_Container";
+        this.container_type = "Explosive_Container";
+
+        if(check == "Explosive_Container")
+        {
+            if(chosenShip.max_tox_or_exp < 1+ chosenShip.max_tox_or_exp_counter)
+            {
+                chosenShip.containers.remove(this);
+                System.out.println("Can't add, limit reached");
+            }
+            else
+            {
+                chosenShip.max_tox_or_exp_counter++;
+                chosenShip.MAX_WEIGHT_counter += this.brutto_weight;
+                chosenShip.MAX_CAPACITY_counter += 1;
+            }
+        }
     }
 
     public String toString()
