@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Ship {
@@ -41,26 +42,6 @@ public class Ship {
 
     }//data structures SET
 
-    public void setMAX_CAPACITY_counter(int MAX_CAPACITY_counter) {
-        this.MAX_CAPACITY_counter = MAX_CAPACITY_counter;
-    }
-
-    public void setMAX_WEIGHT_counter(int MAX_WEIGHT_counter) {
-        this.MAX_WEIGHT_counter = MAX_WEIGHT_counter;
-    }
-
-    public void setMax_tox_or_exp_counter(int max_tox_or_exp_counter) {
-        this.max_tox_or_exp_counter = max_tox_or_exp_counter;
-    }
-
-    public void setMax_heavy_counter(int max_heavy_counter) {
-        this.max_heavy_counter = max_heavy_counter;
-    }
-
-    public void setMax_electro_counter(int max_electro_counter) {
-        this.max_electro_counter = max_electro_counter;
-    }
-
     public  int getShip_ID() {
         return ship_ID;
     }
@@ -101,14 +82,18 @@ public class Ship {
         this.max_electro = max_electro;
     }
 
-    public static void whichShipShow()
+    public String getName() {
+        return name;
+    }
+
+    public static String whichShipShow()
     {
-        System.out.println("Which Ship you want to see ?: \n");
+        System.out.println("Which Ship?: \n");
 
         for (Ship obj : Ship.ships)
         {
             System.out.println("-------------------------------");
-            System.out.println( "Name: "+obj.name+"\n");
+            System.out.println("Name: "+obj.name+"\n");
             System.out.println("ID: "+obj.getShip_ID()+"\n");
             System.out.println("Heavy max: "+obj.max_heavy_counter+"/"+obj.max_heavy+"\n");
             System.out.println("Electric Max: "+obj.max_electro_counter+"/"+obj.max_electro+"\n");
@@ -128,14 +113,11 @@ public class Ship {
             System.out.println("display contents of ship:"+shipName);
             contentsOfShip(Seaport.findShip(shipName));
         }
-
         else
         {
             System.out.println("Sorry, name not found");
-
         }
-
-
+        return shipName;
     }
 
     public static void contentsOfShip(Ship ship)
@@ -149,6 +131,32 @@ public class Ship {
 
     }
 
+
+
+    public static Standard_Container findContainer(String shipName,int contID)
+    {
+        for (int i = 0; i < Seaport.findShip(shipName).containers.size(); i++)
+        {
+            if(Objects.equals(contID, Seaport.findShip(shipName).containers.get(i).container_ID))
+            {
+                return Seaport.findShip(shipName).containers.get(i);
+            }
+        }
+        return null;
+    }
+    public static boolean compareContainer(String shipName,int contID) {
+
+        boolean compare = false;
+        for (int i = 0; i < Seaport.findShip(shipName).containers.size(); i++)
+        {
+            if (Objects.equals(contID, Seaport.findShip(shipName).containers.get(i).container_ID))
+            {
+                compare = true;
+                break;
+            }
+        }
+        return compare;
+    }
     /*Write an application that will be used to manage the logistics of a seaport in terms of a
 transhipment terminal for container ships. The application will be used to unload and load containers
 from/to the ship. In case of unloading, the containers can be transferred to the warehouse

@@ -72,19 +72,16 @@ public class Seaport {
             System.out.println("add containers to this :"+shipName);
             container_menu(findShip(shipName));
         }
-
         else
         {
             System.out.println("Sorry, name not found");
 
         }
-
-
     }
-    public static Ship findShip(String shipName) {
-
-        for (int i = 0; i < Ship.ships.size(); i++) {
-
+    public static Ship findShip(String shipName)
+    {
+        for (int i = 0; i < Ship.ships.size(); i++)
+        {
             if(Objects.equals(shipName, Ship.ships.get(i).name))
             {
                 return Ship.ships.get(i);
@@ -104,15 +101,13 @@ public class Seaport {
                 compare = true;
                 break;
             }
-
         }
         return compare;
     }
 
 
-
-    public static void container_menu(Ship chosenShip) {
-
+    public static void container_menu(Ship chosenShip)
+    {
         Scanner scan2 = new Scanner(System.in);
 
         System.out.println("What's the container type?");

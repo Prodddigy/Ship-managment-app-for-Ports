@@ -42,8 +42,6 @@ public class Main {
 
 
  */
-
-
         Scanner scan = new Scanner(System.in);
 
         boolean loop = true;
@@ -53,7 +51,11 @@ public class Main {
             System.out.println("1. Create a ship");
             System.out.println("2. Create container");
             System.out.println("3. Show containers from a certain Ship");
-            System.out.println("4. Quit");
+            System.out.println("4. Move containers From Ship To WareHouse");
+            System.out.println("5. Move containers From WareHouse To Ship, not working");
+            System.out.println("6. Move containers From WareHouse To RailWay Station");
+            System.out.println("7. Show contents of WareHouse");
+            System.out.println("8. Quit");
             int menu = scan.nextInt();
 
             switch (menu) {
@@ -75,12 +77,45 @@ public class Main {
                 }
 
                 case 3: {
+                    System.out.println("Loading...");
                     Ship.whichShipShow();
 
                     break;
                 }
 
                 case 4: {
+                    System.out.println("Loading...");
+                    WareHouse.moveContainerShip_WareHouse(Ship.whichShipShow());
+
+                    break;
+                }
+
+                case 5: {
+                    System.out.println("Loading...");
+                   // System.out.println("To which Ship you want to move containers");
+                   // WareHouse.moveContainerWareHouse_Ship(Ship.whichShipShow());
+
+
+                    break;
+                }
+
+                case 6: {
+                    System.out.println("Loading...");
+                    RailwayStation.moveToTrain();
+
+
+                    break;
+                }
+                case 7: {
+                    System.out.println("Loading...");
+
+                    WareHouse.showWareHouse();
+
+                    break;
+                }
+
+
+                case 8: {
                     System.out.println("Bye! Merry Christmas!");
                     scan.close();
                     loop = false;
@@ -94,28 +129,7 @@ public class Main {
                     break;
                 }
             }
-
         }while(loop);
 
-
-
-
-
-
-
-
-
-        //System.out.println(test.getShip_ID());
-
-
-
-        //  Standard_Container test1 = new Toxic_Container("test", "secure",
-        //        "certificate", 5, 1, "standard");
-
-
-
-        //   System.out.println("toxic"+test1.container_ID+ " "+ test1.container_type);
-
     }
-
 }
