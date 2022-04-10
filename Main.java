@@ -93,7 +93,7 @@ public class Main {
                 case 5: {
                     System.out.println("Loading...");
                    // System.out.println("To which Ship you want to move containers");
-                   // WareHouse.moveContainerWareHouse_Ship(Ship.whichShipShow());
+                    WareHouse.moveContainerWareHouse_Ship(Ship.whichShipShow());
 
 
                     break;

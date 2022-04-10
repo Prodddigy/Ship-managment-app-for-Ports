@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class RailwayStation {
 
 
-    static ArrayList<Standard_Container> train = new ArrayList<>(10);
+    static ArrayList<Standard_Container> train = new ArrayList<>();
 
     public static void moveToTrain()
     {
@@ -15,6 +15,7 @@ public class RailwayStation {
 
         System.out.println("Enter ID of a container: \n");
         int contID = scan.nextInt();
+
         if (WareHouse.whichContFromWareHouse(contID)!=null)
         {
             train.add(WareHouse.whichContFromWareHouse(contID));

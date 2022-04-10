@@ -128,10 +128,7 @@ public class Ship {
             System.out.println(cont.toString());
             System.out.println("\n");
         }
-
     }
-
-
 
     public static Standard_Container findContainer(String shipName,int contID)
     {
@@ -144,6 +141,7 @@ public class Ship {
         }
         return null;
     }
+
     public static boolean compareContainer(String shipName,int contID) {
 
         boolean compare = false;

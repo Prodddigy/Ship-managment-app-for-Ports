@@ -110,6 +110,10 @@ public class Standard_Container {
 
     }
 
+    public String getContainer_type() {
+        return container_type;
+    }
+
     public String toString()
     {
         return "Type: "+ this.container_type+","+
