@@ -3,9 +3,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-
-
-
 public class WareHouse
 {
 
@@ -20,9 +17,8 @@ public class WareHouse
     //if container.name == -||- then max --
     //if container.name == -||- anc max.container.name =0 then dont add simple enought
 
-
     static ArrayList<Standard_Container> storage = new ArrayList<>();
-//Capacity :EXP =14, ToxicP = 10, ToxicL =5. !!!!!
+    //Capacity :EXP =14, ToxicP = 10, ToxicL =5. !!!!!
 
     public static void moveContainerShip_WareHouse(String shipName)
     {

@@ -4,6 +4,11 @@ public class Main {
 
 
     public static LocalDate localDate = LocalDate.now();
+
+    public static void run() {
+        localDate =localDate.plusDays(1);
+    }
+
     public static void main(String[] args) throws InterruptedException{
 
 
@@ -21,14 +26,14 @@ public class Main {
         ship2.setName("Titanic");
 
         ship2.setMax_electro(3); ship2.setMax_heavy(3);
-        ship2.setMAX_WEIGHT(50); ship2.setMAX_CAPACITY(7);
+        ship2.setMAX_WEIGHT(50); ship2.setMAX_CAPACITY(8);
         ship2.setHome_port("New York"); ship2.setDestination("Poland"); ship2.setMax_tox_or_exp(3);
         ship2.setTransport_origin("New York");
 
         ship3.setName("Red");
 
         ship3.setMax_electro(3); ship3.setMax_heavy(3);
-        ship3.setMAX_WEIGHT(50); ship3.setMAX_CAPACITY(7);
+        ship3.setMAX_WEIGHT(50); ship3.setMAX_CAPACITY(9);
         ship3.setHome_port("Calagari"); ship3.setDestination("Poland"); ship3.setMax_tox_or_exp(3);
         ship3.setTransport_origin("Calagari");
 /*
@@ -40,12 +45,12 @@ public class Main {
         System.out.println("toxic liquid test \n");
 */
        // Toxic_Liquid_Container cont3 = new Toxic_Liquid_Container(ship1);
- System.out.println(localDate);
+//     System.out.println(localDate);
 
         Thread changeDate = new Thread(() -> {
             while (!Thread.interrupted()) {
-                localDate = localDate.plusDays(1);
-                System.out.println("Current day: "+localDate);
+                run();
+              //  System.out.println("Current day: "+localDate);
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
@@ -54,11 +59,16 @@ public class Main {
             }
         });
 
+
+
+      //  changeDate.interrupt();
+     //   changeDate.start();
+
+
+       // Thread thread = new Thread();
         changeDate.start();
 
-        Thread.sleep(15000);
 
-        changeDate.interrupt();
 
 
         Scanner scan = new Scanner(System.in);
@@ -75,7 +85,8 @@ public class Main {
             System.out.println("6. Move containers From WareHouse To RailWay Station");
             System.out.println("7. Show contents of WareHouse");
             System.out.println("8. Make a departure of a ship");
-            System.out.println("9. Quit");
+            System.out.println("9. check current date");
+            System.out.println("10. Quit");
             int menu = scan.nextInt();
 
             switch (menu) {
@@ -92,7 +103,7 @@ public class Main {
                     System.out.println("Loading...");
                     Seaport.whichShip();
 
-                    //Seaport.container_menu();
+
                     break;
                 }
 
@@ -112,7 +123,7 @@ public class Main {
 
                 case 5: {
                     System.out.println("Loading...");
-                   // System.out.println("To which Ship you want to move containers");
+
                     WareHouse.moveContainerWareHouse_Ship(Ship.whichShipShow());
 
 
@@ -142,6 +153,14 @@ public class Main {
 
 
                 case 9: {
+                    System.out.println("current date: "+localDate);
+
+
+                    break;
+                }
+
+
+                case 10: {
                     System.out.println("Bye! Merry Christmas!");
                     scan.close();
                     loop = false;
@@ -152,10 +171,16 @@ public class Main {
                 default: {
 
                     System.out.println("Wrong choice! :'(");
+
                     break;
                 }
             }
+
         }while(loop);
 
+        Thread.sleep(1500000);
+      
     }
+
+
 }
