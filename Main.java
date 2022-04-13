@@ -1,9 +1,10 @@
-
+import java.time.LocalDate;
 import java.util.Scanner;
 public class Main {
 
 
-    public static void main(String[] args) {
+    public static LocalDate localDate = LocalDate.now();
+    public static void main(String[] args) throws InterruptedException{
 
 
         Ship ship1  = new Ship();
@@ -37,11 +38,29 @@ public class Main {
         System.out.println("Explosive test \n");
         Explosive_Container cont2 = new Explosive_Container(ship1);
         System.out.println("toxic liquid test \n");
+*/
+       // Toxic_Liquid_Container cont3 = new Toxic_Liquid_Container(ship1);
+ System.out.println(localDate);
 
-        Toxic_Liquid_Container cont3 = new Toxic_Liquid_Container(ship1);
+        Thread changeDate = new Thread(() -> {
+            while (!Thread.interrupted()) {
+                localDate = localDate.plusDays(1);
+                System.out.println("Current day: "+localDate);
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    return;
+                }
+            }
+        });
+
+        changeDate.start();
+
+        Thread.sleep(15000);
+
+        changeDate.interrupt();
 
 
- */
         Scanner scan = new Scanner(System.in);
 
         boolean loop = true;
@@ -52,10 +71,11 @@ public class Main {
             System.out.println("2. Create container");
             System.out.println("3. Show containers from a certain Ship");
             System.out.println("4. Move containers From Ship To WareHouse");
-            System.out.println("5. Move containers From WareHouse To Ship, not working");
+            System.out.println("5. Move containers From WareHouse To Ship");
             System.out.println("6. Move containers From WareHouse To RailWay Station");
             System.out.println("7. Show contents of WareHouse");
-            System.out.println("8. Quit");
+            System.out.println("8. Make a departure of a ship");
+            System.out.println("9. Quit");
             int menu = scan.nextInt();
 
             switch (menu) {
@@ -113,9 +133,15 @@ public class Main {
 
                     break;
                 }
-
-
                 case 8: {
+                    System.out.println("Loading...");
+
+                    Seaport.departureOfShip(Ship.whichShipShow());
+                    break;
+                }
+
+
+                case 9: {
                     System.out.println("Bye! Merry Christmas!");
                     scan.close();
                     loop = false;

@@ -94,8 +94,8 @@ public class WareHouse
     public static boolean checkOutCapacity(Standard_Container cont)
     {
         if(Objects.equals(cont.getContainer_type(), "Toxic_Powder_Container") && MaxTP_counter+1 <= MaxTP)
-        {
-                MaxTP_counter++;
+        {//change all for the timing purposes check notes on notebook from gui/java
+
 
                 return true;
         }

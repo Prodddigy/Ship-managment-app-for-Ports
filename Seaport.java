@@ -167,4 +167,13 @@ public class Seaport {
 
 
     }
+
+
+    public static void departureOfShip(String shipName)
+    {
+       Ship.ships.remove(Seaport.findShip(shipName));
+        System.out.println("The ship"+shipName+"Has left the Seaport");
+
+
+    }
 }

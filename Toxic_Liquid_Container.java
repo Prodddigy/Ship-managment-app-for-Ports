@@ -3,7 +3,9 @@ public class Toxic_Liquid_Container extends Heavy_Container implements Liquidabl
     public Toxic_Liquid_Container(Ship chosenShip, String check)
     {
         super(chosenShip,check);
+
         constructor();
+
         this.container_type = "Toxic_Liquid";
         if(check == "Toxic_Liquid_Container")
         {
