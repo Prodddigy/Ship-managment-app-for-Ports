@@ -20,6 +20,8 @@ public class Standard_Container {
  is not only a kind of heavy container, but also has the features of a container for liquids
  cargo.
   */
+    public Thread expirationDate=null;
+
     String sender_info;
     String secure_info;
     String certificate;
@@ -41,6 +43,7 @@ public class Standard_Container {
     public Standard_Container(Ship chosenShip,String check) {
 
         Scanner scan3 = new Scanner(System.in);
+
 
         System.out.println("What's the sender's information ?");
         String sender_info = scan3.nextLine();

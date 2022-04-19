@@ -5,7 +5,7 @@ public class Sender {
 
     String adress;
 
-    int numOFComplains;
+    int numOFComplains=0;
     int DOB;// this should be combined with pesel and use of LocalDate obj
     int pesel;
 

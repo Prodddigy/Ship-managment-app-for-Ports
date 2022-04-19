@@ -50,7 +50,6 @@ public class Main {
         Thread changeDate = new Thread(() -> {
             while (!Thread.interrupted()) {
                 run();
-              //  System.out.println("Current day: "+localDate);
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
@@ -65,7 +64,7 @@ public class Main {
      //   changeDate.start();
 
 
-       // Thread thread = new Thread();
+
         changeDate.start();
 
 
@@ -162,6 +161,8 @@ public class Main {
 
                 case 10: {
                     System.out.println("Bye! Merry Christmas!");
+
+                    changeDate.interrupt();
                     scan.close();
                     loop = false;
                     break;
@@ -178,7 +179,7 @@ public class Main {
 
         }while(loop);
 
-        Thread.sleep(1500000);
+        //Thread.sleep(1500000);
       
     }
 

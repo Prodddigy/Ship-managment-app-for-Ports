@@ -10,12 +10,22 @@ public class WareHouse
     static int MaxTP=10;
     static int MaxTL=5;
 
+    static int MaxElec=10;
+    static int MaxHeavy=10;
+    static int MaxStandard=10;
+    static int MaxLiq=10;
 
+    static int MaxLiq_counter=0;
+    static int MaxElec_counter=0;
+    static int MaxHeavy_counter=0;
+    static int MaxStandard_counter=0;
     static int MaxExp_counter=0;
     static int MaxTP_counter=0;
     static int MaxTL_counter=0;
     //if container.name == -||- then max --
     //if container.name == -||- anc max.container.name =0 then dont add simple enought
+
+    //
 
     static ArrayList<Standard_Container> storage = new ArrayList<>();
     //Capacity :EXP =14, ToxicP = 10, ToxicL =5. !!!!!
@@ -59,7 +69,6 @@ public class WareHouse
            System.out.println("no such container in: "+shipName+"ship :/");
     }
 
-
     public static void updatePlungedShip(Standard_Container cont, Ship ship)
     {
         ship.MAX_WEIGHT_counter-=cont.brutto_weight;
@@ -82,16 +91,54 @@ public class WareHouse
         {
             ship.max_heavy_counter--;
         }
-
     }
-
-
 
     public static boolean checkOutCapacity(Standard_Container cont)
     {
-        if(Objects.equals(cont.getContainer_type(), "Toxic_Powder_Container") && MaxTP_counter+1 <= MaxTP)
-        {//change all for the timing purposes check notes on notebook from gui/java
+        if(Objects.equals(cont.getContainer_type(), "Standard Cargo")&& MaxStandard_counter+1 <= MaxStandard)
+        {
+            MaxStandard_counter++;
 
+            return true;
+        }
+
+        if(Objects.equals(cont.getContainer_type(), "Liquid_Container") && MaxLiq_counter+1 <= MaxLiq)
+        {
+            MaxLiq_counter++;
+
+            return true;
+        }
+
+        if(Objects.equals(cont.getContainer_type(), "Refrigerated_Container") && MaxElec_counter+1 <= MaxElec)
+        {
+            MaxElec_counter++;
+
+            return true;
+        }
+
+        if(Objects.equals(cont.getContainer_type(), "Heavy_Container") && MaxHeavy_counter+1 <= MaxHeavy)
+        {
+            MaxHeavy_counter++;
+
+            return true;
+        }
+
+        if(Objects.equals(cont.getContainer_type(), "Toxic_Powder_Container") && MaxTP_counter+1 <= MaxTP)
+        {
+            MaxTP_counter++;
+
+            Thread TPDate = new Thread(() -> {
+                while (!Thread.interrupted()) {
+                    try {
+                        Thread.sleep(50000);
+                    } catch (InterruptedException e) {
+                        return;
+                    }//sender interrupt
+                }
+            });
+            //remove this and make an obj on IRRS
+            //method(cont.sender_info).numbrofcompains++;
+            cont.expirationDate =TPDate;
 
                 return true;
         }
@@ -100,20 +147,38 @@ public class WareHouse
         {
             MaxTL_counter++;
 
+            Thread TLDate = new Thread(() -> {
+                while (!Thread.interrupted()) {
+                    try {
+                        Thread.sleep(25000);
+                    } catch (InterruptedException e) {
+                        return;
+                    }//sender interrupt
+                }
+            });
+
+            cont.expirationDate =TLDate;
             return true;
         }
 
         if(Objects.equals(cont.getContainer_type(), "Explosive_Container") && MaxExp_counter +1 <= MaxExp)
         {
-
             MaxExp_counter++;
 
+            Thread EXDate = new Thread(() -> {
+                while (!Thread.interrupted()) {
+                    try {
+                        Thread.sleep(70000);
+                    } catch (InterruptedException e) {
+                        return;
+                    }//sender interrupt
+                }
+            });
+
+            cont.expirationDate = EXDate;
             return true;
-
         }
-
         return false;
-
     }
 
     public static void showWareHouse()
@@ -124,6 +189,7 @@ public class WareHouse
             System.out.println("\n");
         }
     }
+
     public static void moveContainerWareHouse_Ship(String shipName)
     {
         Scanner scan = new Scanner(System.in);
@@ -133,19 +199,20 @@ public class WareHouse
         System.out.println("Choose by entering ID: ");
         int contID = scan.nextInt();
 
-        if(whichContFromWareHouse(contID)!= null)
+        Standard_Container cont =whichContFromWareHouse(contID);
+
+        if(cont!= null)
         {
            if( checkConstraints(contID,shipName))
            {
-               Seaport.findShip(shipName).containers.add(whichContFromWareHouse(contID));
+               Seaport.findShip(shipName).containers.add(cont);
 
-               storage.remove(whichContFromWareHouse(contID));
+               storage.remove(cont);
            }
         }
         else
             System.out.println("No Such container in Warehouse :/");
     }
-
 
     public static Standard_Container whichContFromWareHouse(int contID)
     {
@@ -195,6 +262,7 @@ public class WareHouse
                 tmpShip.MAX_WEIGHT_counter += tmpCont.brutto_weight;
                 tmpShip.max_electro_counter ++;
 
+
                 check = true;
             }
             else
@@ -213,6 +281,7 @@ public class WareHouse
                 tmpShip.MAX_WEIGHT_counter += tmpCont.brutto_weight;
                 tmpShip.max_heavy_counter ++;
 
+                decreaseContCounter(tmpCont);
                 check = true;
             }
             else
@@ -244,9 +313,7 @@ public class WareHouse
             }
         }
         return check;
-
     }
-
 
     public static void decreaseContCounter(Standard_Container tmpCont)
     {
@@ -254,15 +321,29 @@ public class WareHouse
         {
             MaxTP_counter--;
         }
-
         if(Objects.equals(tmpCont.getContainer_type(), "Toxic_Liquid"))
         {
             MaxTL_counter--;
         }
-
         if(Objects.equals(tmpCont.getContainer_type(), "Explosive_Container"))
         {
             MaxExp_counter--;
+        }
+        if(Objects.equals(tmpCont.getContainer_type(), "Refrigerated_Container"))
+        {
+            MaxElec_counter--;
+        }
+        if(Objects.equals(tmpCont.getContainer_type(), "Refrigerated_Container"))
+        {
+            MaxHeavy_counter--;
+        }
+        if(Objects.equals(tmpCont.getContainer_type(), "Standard Cargo"))
+        {
+            MaxStandard_counter--;
+        }
+        if(Objects.equals(tmpCont.getContainer_type(), "Liquid_Container"))
+        {
+            MaxLiq_counter--;
         }
     }
 }
