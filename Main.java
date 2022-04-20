@@ -9,7 +9,7 @@ public class Main {
         localDate =localDate.plusDays(1);
     }
 
-    public static void main(String[] args) throws InterruptedException{
+    public static void main(String[] args) throws InterruptedException, IrresponsibleSenderWithDangerousGoods {
 
 
         Ship ship1  = new Ship();
@@ -46,6 +46,9 @@ public class Main {
 */
        // Toxic_Liquid_Container cont3 = new Toxic_Liquid_Container(ship1);
 //     System.out.println(localDate);
+
+
+        WareHouse.setWarehouseConstraints();
 
         Thread changeDate = new Thread(() -> {
             while (!Thread.interrupted()) {

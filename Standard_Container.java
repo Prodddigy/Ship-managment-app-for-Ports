@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,6 +22,8 @@ public class Standard_Container {
  cargo.
   */
     public Thread expirationDate=null;
+
+    LocalDate arrivalWarehouseDate;
 
     String sender_info;
     String secure_info;

@@ -30,8 +30,36 @@ public class WareHouse
     static ArrayList<Standard_Container> storage = new ArrayList<>();
     //Capacity :EXP =14, ToxicP = 10, ToxicL =5. !!!!!
 
-    public static void moveContainerShip_WareHouse(String shipName)
+
+    public static void setWarehouseConstraints()
     {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Maximum of Explosive containers? ");
+        MaxExp = scan.nextInt();
+
+        System.out.println("Maximum of Toxic Powder containers? ");
+        MaxTP = scan.nextInt();
+
+        System.out.println("Maximum of Toxic Liquid containers? ");
+        MaxTL = scan.nextInt();
+
+        System.out.println("Maximum of Electric containers? ");
+        MaxElec = scan.nextInt();
+
+        System.out.println("Maximum of Heavy containers? ");
+        MaxHeavy = scan.nextInt();
+
+        System.out.println("Maximum of Standard containers? ");
+        MaxStandard = scan.nextInt();
+
+        System.out.println("Maximum of Liquid containers? ");
+        MaxLiq = scan.nextInt();
+
+
+    }
+
+
+    public static void moveContainerShip_WareHouse(String shipName) throws IrresponsibleSenderWithDangerousGoods {
 
         Scanner scan = new Scanner(System.in);
 
@@ -43,13 +71,14 @@ public class WareHouse
         if(Ship.compareContainer(shipName,contID))
         {
             moveToWareHouse(shipName,Ship.findContainer(shipName,contID));
+            Ship.findContainer(shipName,contID).arrivalWarehouseDate = Main.localDate;
+
         }
         else
             System.out.println("sorry, container not found :/");
     }
 
-   public static void moveToWareHouse(String shipName,Standard_Container cont)
-   {
+   public static void moveToWareHouse(String shipName,Standard_Container cont) throws IrresponsibleSenderWithDangerousGoods {
 
        Ship tmpShip = Seaport.findShip(shipName);
        if(cont != null)
@@ -93,7 +122,7 @@ public class WareHouse
         }
     }
 
-    public static boolean checkOutCapacity(Standard_Container cont)
+    public static boolean checkOutCapacity(Standard_Container cont) throws IrresponsibleSenderWithDangerousGoods
     {
         if(Objects.equals(cont.getContainer_type(), "Standard Cargo")&& MaxStandard_counter+1 <= MaxStandard)
         {
@@ -123,22 +152,40 @@ public class WareHouse
             return true;
         }
 
-        if(Objects.equals(cont.getContainer_type(), "Toxic_Powder_Container") && MaxTP_counter+1 <= MaxTP)
-        {
+        if(Objects.equals(cont.getContainer_type(), "Toxic_Powder_Container") && MaxTP_counter+1 <= MaxTP) {
             MaxTP_counter++;
+
 
             Thread TPDate = new Thread(() -> {
                 while (!Thread.interrupted()) {
                     try {
                         Thread.sleep(50000);
+
                     } catch (InterruptedException e) {
+
                         return;
                     }//sender interrupt
+                    try {
+                        throw new IrresponsibleSenderWithDangerousGoods(cont.secure_info, cont.certificate, cont.brutto_weight, cont.tare_weight, cont.nettoweight, cont.container_ID, cont.container_type);
+
+
+                    }catch (IrresponsibleSenderWithDangerousGoods f){
+
+                                // complain.add(expCont);
+                    }
                 }
             });
+            //throw new IrresponsibleSenderWithDangerousGoods(cont.secure_info, cont.certificate, cont.brutto_weight, cont.tare_weight, cont.nettoweight, cont.container_ID, cont.container_type);
+
+
+
+
+
+            TPDate.start();
+
             //remove this and make an obj on IRRS
             //method(cont.sender_info).numbrofcompains++;
-            cont.expirationDate =TPDate;
+           // cont.expirationDate =TPDate;
 
                 return true;
         }
@@ -205,6 +252,11 @@ public class WareHouse
         {
            if( checkConstraints(contID,shipName))
            {
+                if(cont.getContainer_type() =="Explosive_Container" || cont.getContainer_type() =="Toxic_Liquid" || cont.getContainer_type() =="Toxic_Powder_Container" )
+                {
+                    cont.expirationDate.interrupt();
+                }
+
                Seaport.findShip(shipName).containers.add(cont);
 
                storage.remove(cont);
