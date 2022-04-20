@@ -166,7 +166,10 @@ public class WareHouse
                         return;
                     }//sender interrupt
                     try {
-                        throw new IrresponsibleSenderWithDangerousGoods(cont.secure_info, cont.certificate, cont.brutto_weight, cont.tare_weight, cont.nettoweight, cont.container_ID, cont.container_type);
+                        throw new IrresponsibleSenderWithDangerousGoods(
+                                cont.secure_info, cont.certificate, cont.brutto_weight, cont.tare_weight,
+                                cont.nettoweight, cont.container_ID, cont.container_type,
+                                cont.arrivalWarehouseDate, cont.expDateTime);
 
 
                     }catch (IrresponsibleSenderWithDangerousGoods f){
@@ -177,6 +180,7 @@ public class WareHouse
                             cont.expDateTime = Main.localDate;
                             storage.remove(cont);
                             MaxTP_counter--;
+                            send.numOFComplains++;
 
                         }
 
@@ -189,7 +193,7 @@ public class WareHouse
 
             TPDate.start();
 
-            cont.expirationDate =TPDate;
+            cont.expirationDoc =TPDate;
 
             //remove this and make an obj on IRRS
             //method(cont.sender_info).numbrofcompains++;
@@ -208,11 +212,31 @@ public class WareHouse
                         Thread.sleep(25000);
                     } catch (InterruptedException e) {
                         return;
+                    }
+                    try {
+                        throw new IrresponsibleSenderWithDangerousGoods(cont.secure_info, cont.certificate, cont.brutto_weight, cont.tare_weight,
+                                cont.nettoweight, cont.container_ID, cont.container_type,
+                                cont.arrivalWarehouseDate, cont.expDateTime);
+
+                    }catch (IrresponsibleSenderWithDangerousGoods f){
+                        Sender send = Sender.findSender(cont.sender_info);
+                        if(send != null)
+                        {
+                            send.complain.add(f);
+                            cont.expDateTime = Main.localDate;
+                            storage.remove(cont);
+                            MaxTL_counter--;
+                            send.numOFComplains++;
+                        }
+                        //cont.sender_info.
+                        // complain.add(expCont);
                     }//sender interrupt
                 }
             });
 
-            cont.expirationDate =TLDate;
+            TLDate.start();
+
+            cont.expirationDoc =TLDate;
             return true;
         }
 
@@ -226,11 +250,30 @@ public class WareHouse
                         Thread.sleep(70000);
                     } catch (InterruptedException e) {
                         return;
+                    }
+                    try {
+                        throw new IrresponsibleSenderWithDangerousGoods(cont.secure_info, cont.certificate, cont.brutto_weight, cont.tare_weight,
+                                cont.nettoweight, cont.container_ID, cont.container_type,
+                                cont.arrivalWarehouseDate, cont.expDateTime);
+
+                    }catch (IrresponsibleSenderWithDangerousGoods f){
+                        Sender send = Sender.findSender(cont.sender_info);
+                        if(send != null)
+                        {
+                            send.complain.add(f);
+                            cont.expDateTime = Main.localDate;
+                            storage.remove(cont);
+                            MaxExp_counter--;
+                            send.numOFComplains++;
+                        }
+                        //cont.sender_info.
+                        // complain.add(expCont);
                     }//sender interrupt
                 }
             });
+            EXDate.start();
 
-            cont.expirationDate = EXDate;
+            cont.expirationDoc = EXDate;
             return true;
         }
         return false;
@@ -260,9 +303,11 @@ public class WareHouse
         {
            if( checkConstraints(contID,shipName))
            {
-                if(cont.getContainer_type() =="Explosive_Container" || cont.getContainer_type() =="Toxic_Liquid" || cont.getContainer_type() =="Toxic_Powder_Container" )
+                if(cont.getContainer_type() =="Explosive_Container"
+                        || cont.getContainer_type() =="Toxic_Liquid"
+                        || cont.getContainer_type() =="Toxic_Powder_Container")
                 {
-                    cont.expirationDate.interrupt();
+                    cont.expirationDoc.interrupt();
                 }
 
                Seaport.findShip(shipName).containers.add(cont);
@@ -293,7 +338,6 @@ public class WareHouse
         Ship tmpShip= Seaport.findShip(shipName);
 
         Standard_Container tmpCont = whichContFromWareHouse(contID);
-
 
         if(Objects.equals(tmpCont.container_type, "Standard Cargo")
         || Objects.equals(tmpCont.getContainer_type(), "Liquid_Container"))

@@ -10,11 +10,11 @@ public class Sender
 
     int year;
 
-    String Syear = year+" ";
+    String Syear ;
     String month;
     String day;
 
-    int numOFComplains=0;
+    int numOFComplains;
     //int DOB;// this should be combined with pesel and use of LocalDate obj
     String pesel;
 
@@ -30,9 +30,12 @@ public class Sender
         this.month= month;
         this.year=year;
         this.day=day;
+        this.Syear = this.year+"";
         makePESEL();
         senders.add(this);
         //numOFComplains++;
+
+        //System.out.println(this.senderName+this.pesel+" "+this.Syear);
     }
 
     public static Sender findSender(String senderInfo)
@@ -51,21 +54,22 @@ public class Sender
 
     public void makePESEL()
     {
-        if(year <2000 && month.length()<1)
+        if(year <2000 && month.length()<2)
         {
             month = "0"+month;
         }
 
-        if(month.length() < 1)
+        if( year >= 2000 && month.length() < 2)
         {
             month = month.replace("1","3");
         }
-        else
+
+         if(year >=2000)
         {
             month = "2"+month;
         }
 
-        Syear= Syear.substring(0,1);
+        Syear= Syear.substring(2,4);
 
         pesel =Syear+month+day;
     }

@@ -22,7 +22,7 @@ public class Standard_Container {
  is not only a kind of heavy container, but also has the features of a container for liquids
  cargo.
   */
-    public Thread expirationDate=null;
+    public Thread expirationDoc =null;
 
     LocalDate expDateTime;
     LocalDate arrivalWarehouseDate;
@@ -96,7 +96,13 @@ public class Standard_Container {
         if(Sender.findSender(sender_info) == null)
         {
             chosenShip.containers.remove(this);
-            System.out.println("No such a sender, removing... :^(");
+            System.out.println("No such a sender, removing... :^( \n");
+        }
+
+        if(Sender.findSender(sender_info).numOFComplains ==2)
+        {
+            System.out.println("This sender "+sender_info+" appears to be blacklisted, removing container...\n");
+            chosenShip.containers.remove(this);
         }
 
         if(check == "Standard_Container")

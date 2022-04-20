@@ -5,7 +5,8 @@ public class Main {
 
     public static LocalDate localDate = LocalDate.now();
 
-    public static void run() {
+    public static void run()
+    {
         localDate =localDate.plusDays(1);
     }
 

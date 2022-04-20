@@ -18,7 +18,7 @@ public class RailwayStation
 
         if (cont!=null)
         {
-            train.add(cont);
+
 
             WareHouse.storage.remove(cont);
             if(Objects.equals(cont.container_type,"Toxic_Powder_Container")
@@ -27,6 +27,7 @@ public class RailwayStation
             {
                 cancelExpiration(cont);
             }
+            train.add(cont);
         }
         else
             System.out.println("no such container in WareHouse :/ \n");
@@ -39,7 +40,7 @@ public class RailwayStation
 
     public static void cancelExpiration(Standard_Container cont)
     {
-        cont.expirationDate.interrupt();
+        cont.expirationDoc.interrupt();
     }
 
     public static void departure() throws InterruptedException {
