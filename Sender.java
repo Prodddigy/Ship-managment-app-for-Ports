@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Sender
 {
@@ -9,25 +10,44 @@ public class Sender
 
     int year;
 
+    String Syear = year+" ";
     String month;
     String day;
 
     int numOFComplains=0;
-    int DOB;// this should be combined with pesel and use of LocalDate obj
+    //int DOB;// this should be combined with pesel and use of LocalDate obj
     String pesel;
 
     ArrayList<IrresponsibleSenderWithDangerousGoods> complain = new ArrayList<>(2);
 
-    Sender(String senderName, String senderSurname,String adress )
+   static ArrayList<Sender> senders = new ArrayList<>();
+
+    Sender(String senderName, String senderSurname,String adress,int year, String month, String day )
     {
         this.senderName = senderName;
         this.senderSurname = senderSurname;
         this.adress = adress;
-
-        numOFComplains++;
+        this.month= month;
+        this.year=year;
+        this.day=day;
+        makePESEL();
+        senders.add(this);
+        //numOFComplains++;
     }
 
-
+    public static Sender findSender(String senderInfo)
+    {
+       Sender sen = null;
+        for (int i = 0; i <senders.size() ; i++)
+        {
+            if (Objects.equals(senderInfo, senders.get(i).senderName))
+            {
+                sen = senders.get(i);
+                break;
+            }
+        }
+        return sen;
+    }
 
     public void makePESEL()
     {
@@ -45,10 +65,8 @@ public class Sender
             month = "2"+month;
         }
 
+        Syear= Syear.substring(0,1);
 
-
-        pesel =year+month+day;
-
+        pesel =Syear+month+day;
     }
-
 }

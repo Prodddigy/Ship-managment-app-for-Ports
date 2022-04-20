@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Standard_Container {
@@ -23,6 +24,7 @@ public class Standard_Container {
   */
     public Thread expirationDate=null;
 
+    LocalDate expDateTime;
     LocalDate arrivalWarehouseDate;
 
     String sender_info;
@@ -88,9 +90,13 @@ public class Standard_Container {
         }
         else
         {
-
             System.out.println("sorry too heavy or too many containers already");
+        }
 
+        if(Sender.findSender(sender_info) == null)
+        {
+            chosenShip.containers.remove(this);
+            System.out.println("No such a sender, removing... :^(");
         }
 
         if(check == "Standard_Container")

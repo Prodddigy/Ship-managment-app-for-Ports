@@ -70,9 +70,9 @@ public class WareHouse
 
         if(Ship.compareContainer(shipName,contID))
         {
-            moveToWareHouse(shipName,Ship.findContainer(shipName,contID));
-            Ship.findContainer(shipName,contID).arrivalWarehouseDate = Main.localDate;
 
+            Ship.findContainer(shipName,contID).arrivalWarehouseDate = Main.localDate;
+            moveToWareHouse(shipName,Ship.findContainer(shipName,contID));
         }
         else
             System.out.println("sorry, container not found :/");
@@ -170,18 +170,26 @@ public class WareHouse
 
 
                     }catch (IrresponsibleSenderWithDangerousGoods f){
+                        Sender send = Sender.findSender(cont.sender_info);
+                        if(send != null)
+                        {
+                            send.complain.add(f);
+                            cont.expDateTime = Main.localDate;
+                            storage.remove(cont);
+                            MaxTP_counter--;
 
-                                // complain.add(expCont);
+                        }
+
+            //cont.sender_info.
+                        // complain.add(expCont);
                     }
                 }
             });
             //throw new IrresponsibleSenderWithDangerousGoods(cont.secure_info, cont.certificate, cont.brutto_weight, cont.tare_weight, cont.nettoweight, cont.container_ID, cont.container_type);
 
-
-
-
-
             TPDate.start();
+
+            cont.expirationDate =TPDate;
 
             //remove this and make an obj on IRRS
             //method(cont.sender_info).numbrofcompains++;

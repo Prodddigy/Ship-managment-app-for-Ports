@@ -31,7 +31,7 @@ public class RailwayStation
         else
             System.out.println("no such container in WareHouse :/ \n");
 
-        if(train.size() == 1)
+        if(train.size() == 10)
         {
             departure();
         }

@@ -36,7 +36,10 @@ public class Main {
         ship3.setMAX_WEIGHT(50); ship3.setMAX_CAPACITY(9);
         ship3.setHome_port("Calagari"); ship3.setDestination("Poland"); ship3.setMax_tox_or_exp(3);
         ship3.setTransport_origin("Calagari");
-/*
+
+        Sender sen1 = new Sender("Ola","Bialik","Częstochowa", 2001,"4","26");
+        /*
+
         System.out.println("Standard test \n" );
         Standard_Container cont1 = new Standard_Container(ship1);
 
