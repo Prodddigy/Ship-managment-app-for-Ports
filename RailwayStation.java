@@ -18,8 +18,6 @@ public class RailwayStation
 
         if (cont!=null)
         {
-
-
             WareHouse.storage.remove(cont);
             if(Objects.equals(cont.container_type,"Toxic_Powder_Container")
             || Objects.equals(cont.container_type,"Toxic_Liquid")
@@ -32,7 +30,7 @@ public class RailwayStation
         else
             System.out.println("no such container in WareHouse :/ \n");
 
-        if(train.size() == 10)
+        if(train.size() == 1)
         {
             departure();
         }
@@ -46,22 +44,26 @@ public class RailwayStation
     public static void departure() throws InterruptedException {
         //wait 30 secs and clear
         Thread TrainDep = new Thread(() -> {
-            while (!Thread.interrupted()) {
+
                 try {
+
                     System.out.println("Train is waiting to departure...2");
                     Thread.sleep(30000);
-                    System.out.println("Train is gone to the void :)");
-
+                   // System.out.println("Train is gone to the void :)");
+                    train.clear();
+                    /*
+                    if you want to add cont to train check capacity of a train array
+                     */
                 } catch (InterruptedException e) {
                     return;
                 }
                 //sender interrupt
-            }
+
         });
         TrainDep.start();
-        Thread.sleep(30000);
+       // Thread.sleep(30000);
        // System.out.println("Train is gone to the void :)");
-        TrainDep.interrupt();
-            train.clear();
+      //  TrainDep.interrupt();
+
     }
 }
