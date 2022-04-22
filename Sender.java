@@ -1,5 +1,8 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
+
+import static java.util.List.of;
 
 public class Sender
 {
@@ -11,11 +14,12 @@ public class Sender
     int year;
 
     String Syear ;
-    String month;
-    String day;
-
+    String Smonth;
+    String Sday;
+    int month;
+    int day;
     int numOFComplains;
-    //int DOB;// this should be combined with pesel and use of LocalDate obj
+    LocalDate DOB;// this should be combined with pesel and use of LocalDate obj
     String pesel;
 
     ArrayList<IrresponsibleSenderWithDangerousGoods> complain = new ArrayList<>(2);
@@ -27,13 +31,18 @@ public class Sender
         this.senderName = senderName;
         this.senderSurname = senderSurname;
         this.adress = adress;
-        this.month= month;
+        this.Smonth= month;
         this.year=year;
-        this.day=day;
+        this.Sday=day;
         this.Syear = this.year+"";
         makePESEL();
         senders.add(this);
         //numOFComplains++;
+
+        this.month = Integer.parseUnsignedInt(Smonth);
+        this.day = Integer.parseUnsignedInt(Sday);
+
+       // this.DOB = of(int year,int month,int day);
 
         //System.out.println(this.senderName+this.pesel+" "+this.Syear);
     }
@@ -54,23 +63,34 @@ public class Sender
 
     public void makePESEL()
     {
-        if(year <2000 && month.length()<2)
+        if(year <2000 && Smonth.length()<2)
         {
-            month = "0"+month;
+            this.Smonth = "0"+Smonth;
         }
 
-        if( year >= 2000 && month.length() < 2)
+        if( year >= 2000 && Smonth.length() < 2)
         {
-            month = month.replace("1","3");
+            Smonth = Smonth.replace("1","3");
         }
 
          if(year >=2000)
         {
-            month = "2"+month;
+            Smonth = "2"+Smonth;
         }
 
         Syear= Syear.substring(2,4);
 
-        pesel =Syear+month+day;
+        pesel =Syear+Smonth+Sday;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + senderName + '\n' +
+                "Surname: " + senderSurname + '\n' +
+                "Address: " + adress + '\n' +
+                "DOB: " + year+ "."+Smonth+"."+ Sday+"."+ '\n' +
+                "PESEL: " + pesel + '\n' +
+                "Complains: " + numOFComplains + '\n' +
+                "----------------------------------------------";
     }
 }

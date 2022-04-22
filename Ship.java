@@ -88,7 +88,7 @@ public class Ship {
 
     public static String whichShipShow()
     {
-        System.out.println("Which Ship?: \n");
+        System.out.println("Which Ship you want to see?: \n");
 
         for (Ship obj : Ship.ships)
         {
@@ -110,12 +110,13 @@ public class Ship {
 
         if( Seaport.compareShip(shipName))
         {
-            System.out.println("display contents of ship:"+shipName);
+            System.out.println("Display contents of ship: "+shipName);
             contentsOfShip(Seaport.findShip(shipName));
         }
         else
         {
             System.out.println("Sorry, name not found");
+            shipName =null;
         }
         return shipName;
     }

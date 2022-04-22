@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.Scanner;
 public class Main {
 
@@ -31,7 +32,7 @@ public class Main {
         ship2.setHome_port("New York"); ship2.setDestination("Poland"); ship2.setMax_tox_or_exp(3);
         ship2.setTransport_origin("New York");
 
-        ship3.setName("Red");
+        ship3.setName("ARed");
 
         ship3.setMax_electro(3); ship3.setMax_heavy(3);
         ship3.setMAX_WEIGHT(50); ship3.setMAX_CAPACITY(9);
@@ -114,6 +115,7 @@ public class Main {
                 }
 
                 case 3: {
+
                     System.out.println("Loading...");
                     Ship.whichShipShow();
 
@@ -138,8 +140,14 @@ public class Main {
 
                 case 6: {
                     System.out.println("Loading...");
-                    RailwayStation.moveToTrain();
-
+                    if(RailwayStation.train.size() ==10)
+                    {
+                        System.out.println("Sorry, The Train hasn't departed yet");
+                    }
+                    else
+                    {
+                        RailwayStation.moveToTrain();
+                    }
 
                     break;
                 }

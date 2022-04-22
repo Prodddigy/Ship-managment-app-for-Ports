@@ -7,6 +7,7 @@ public class RailwayStation
     static ArrayList<Standard_Container> train = new ArrayList<>();
 
     public static void moveToTrain() throws InterruptedException {
+
         Scanner scan = new Scanner(System.in);
         System.out.println("Contents of WareHouse");
         WareHouse.showWareHouse();
@@ -65,5 +66,13 @@ public class RailwayStation
        // System.out.println("Train is gone to the void :)");
       //  TrainDep.interrupt();
 
+    }
+
+    public static void contentsOfTrain()
+    {
+        for (int i = 0; i < train.size(); i++)
+        {
+            System.out.println(i+"."+train.get(i).toString());
+        }
     }
 }

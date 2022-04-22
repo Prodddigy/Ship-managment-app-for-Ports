@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class WareHouse
 {
-
    static int MaxExp=14;
     static int MaxTP=10;
     static int MaxTL=5;
@@ -33,6 +32,7 @@ public class WareHouse
 
     public static void setWarehouseConstraints()
     {
+        System.out.println("Hi! Please choose capacity of the Warehouse, thank you!");
         Scanner scan = new Scanner(System.in);
         System.out.println("Maximum of Explosive containers? ");
         MaxExp = scan.nextInt();
@@ -54,10 +54,7 @@ public class WareHouse
 
         System.out.println("Maximum of Liquid containers? ");
         MaxLiq = scan.nextInt();
-
-
     }
-
 
     public static void moveContainerShip_WareHouse(String shipName) throws IrresponsibleSenderWithDangerousGoods {
 
@@ -70,7 +67,6 @@ public class WareHouse
 
         if(Ship.compareContainer(shipName,contID))
         {
-
             Ship.findContainer(shipName,contID).arrivalWarehouseDate = Main.localDate;
             moveToWareHouse(shipName,Ship.findContainer(shipName,contID));
         }
@@ -214,7 +210,8 @@ public class WareHouse
                         return;
                     }
                     try {
-                        throw new IrresponsibleSenderWithDangerousGoods(cont.secure_info, cont.certificate, cont.brutto_weight, cont.tare_weight,
+                        throw new IrresponsibleSenderWithDangerousGoods(
+                                cont.secure_info, cont.certificate, cont.brutto_weight, cont.tare_weight,
                                 cont.nettoweight, cont.container_ID, cont.container_type,
                                 cont.arrivalWarehouseDate, cont.expDateTime);
 
@@ -252,7 +249,8 @@ public class WareHouse
                         return;
                     }
                     try {
-                        throw new IrresponsibleSenderWithDangerousGoods(cont.secure_info, cont.certificate, cont.brutto_weight, cont.tare_weight,
+                        throw new IrresponsibleSenderWithDangerousGoods(
+                                cont.secure_info, cont.certificate, cont.brutto_weight, cont.tare_weight,
                                 cont.nettoweight, cont.container_ID, cont.container_type,
                                 cont.arrivalWarehouseDate, cont.expDateTime);
 
@@ -281,6 +279,7 @@ public class WareHouse
 
     public static void showWareHouse()
     {
+        System.out.println("Contents of Warehouse");
         for(Standard_Container cont : WareHouse.storage)
         {
             System.out.println(cont.toString());
@@ -290,33 +289,36 @@ public class WareHouse
 
     public static void moveContainerWareHouse_Ship(String shipName)
     {
+
+        if(shipName != null) {
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Which container to move ?\n");
-        showWareHouse();
-        System.out.println("Choose by entering ID: ");
-        int contID = scan.nextInt();
+            System.out.println("Which container to move into the "+shipName+ "?\n");
+            showWareHouse();
+            System.out.println("Choose by entering ID: ");
+            int contID = scan.nextInt();
 
-        Standard_Container cont =whichContFromWareHouse(contID);
+            Standard_Container cont = whichContFromWareHouse(contID);
 
-        if(cont!= null)
-        {
-           if( checkConstraints(contID,shipName))
-           {
-                if(cont.getContainer_type() =="Explosive_Container"
-                        || cont.getContainer_type() =="Toxic_Liquid"
-                        || cont.getContainer_type() =="Toxic_Powder_Container")
-                {
-                    cont.expirationDoc.interrupt();
+            if (cont != null) {
+                if (checkConstraints(contID, shipName)) {
+                    if (cont.getContainer_type() == "Explosive_Container"
+                            || cont.getContainer_type() == "Toxic_Liquid"
+                            || cont.getContainer_type() == "Toxic_Powder_Container")
+                    {
+                        cont.expirationDoc.interrupt();
+                    }
+                    // System.out.println("stand after "+MaxStandard_counter);
+                    //increaseContCounter(cont);
+                    //System.out.println("stand before " + MaxStandard_counter);
+
+                    Seaport.findShip(shipName).containers.add(cont);
+
+                    storage.remove(cont);
                 }
-
-               Seaport.findShip(shipName).containers.add(cont);
-
-               storage.remove(cont);
-           }
+            } else
+                System.out.println("No Such container in Warehouse :/");
         }
-        else
-            System.out.println("No Such container in Warehouse :/");
     }
 
     public static Standard_Container whichContFromWareHouse(int contID)
@@ -348,6 +350,8 @@ public class WareHouse
                 tmpShip.MAX_CAPACITY_counter ++;
                 tmpShip.MAX_WEIGHT_counter += tmpCont.brutto_weight;
 
+                decreaseContCounter(tmpCont);
+
                 check = true;
             }
             else
@@ -366,6 +370,7 @@ public class WareHouse
                 tmpShip.MAX_WEIGHT_counter += tmpCont.brutto_weight;
                 tmpShip.max_electro_counter ++;
 
+                decreaseContCounter(tmpCont);
 
                 check = true;
             }
@@ -450,4 +455,5 @@ public class WareHouse
             MaxLiq_counter--;
         }
     }
+
 }

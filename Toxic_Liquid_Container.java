@@ -25,14 +25,14 @@ public class Toxic_Liquid_Container extends Heavy_Container implements Liquidabl
 
     public String toString()
     {
-        return "Type: "+ this.container_type+","+
-                " Sender info: "+ this.sender_info+","+
-                " Security info: "+ this.secure_info+","+
-                " Certificate: "+ this.certificate+","+
-                " Gross weight: "+ this.brutto_weight+","+
-                " Tare weight: "+ this.tare_weight+","+
-                " Net Weight: "+ this.nettoweight+","+
-                " Container ID: "+ this.container_ID;
+        return  " Type         : "+ this.container_type+";"+
+                " Container ID : "+ this.container_ID+"\n;"+
+                " Security info: "+ this.secure_info+";"+
+                "            Certificate  : "+ this.certificate+";\n"+
+                " Gross weight : "+ this.brutto_weight+";"+
+                "              Tare weight  : "+ this.tare_weight+";\n"+
+                " Net Weight   : "+ this.nettoweight+";"+
+                "              Sender info  : "+ this.sender_info+";\n";
     }
 }
         /*a container for toxic cargo, which is a type of heavy container, which is available in two

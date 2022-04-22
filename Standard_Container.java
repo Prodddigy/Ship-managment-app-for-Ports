@@ -98,11 +98,14 @@ public class Standard_Container {
             chosenShip.containers.remove(this);
             System.out.println("No such a sender, removing... :^( \n");
         }
-
-        if(Sender.findSender(sender_info).numOFComplains ==2)
+        else if(Sender.findSender(sender_info).numOFComplains ==2)
         {
             System.out.println("This sender "+sender_info+" appears to be blacklisted, removing container...\n");
             chosenShip.containers.remove(this);
+        }
+        else
+        {
+            //then it's fine move on
         }
 
         if(check == "Standard_Container")
@@ -110,22 +113,6 @@ public class Standard_Container {
             chosenShip.MAX_CAPACITY_counter += 1;
             chosenShip.MAX_WEIGHT_counter += this.brutto_weight;
         }
-
-        /*
-        if(chosenShip.MAX_CAPACITY >= 1+ chosenShip.MAX_CAPACITY_counter
-        && chosenShip.MAX_WEIGHT >= this.brutto_weight+ chosenShip.MAX_CAPACITY_counter
-        && chosenShip.max_heavy >= 1+ chosenShip.max_heavy_counter
-        && chosenShip.max_electro >= 1+ chosenShip.max_electro_counter
-        && chosenShip.max_tox_or_exp >= 1+ chosenShip.max_tox_or_exp_counter
-        )
-        {
-
-            chosenShip.containers.add(this);
-        }
-        else
-            System.out.println("dont add");
-*/
-
     }
 
     public String getContainer_type() {
@@ -134,14 +121,14 @@ public class Standard_Container {
 
     public String toString()
     {
-        return "Type: "+ this.container_type+","+
-                " Sender info: "+ this.sender_info+","+
-                " Security info: "+ this.secure_info+","+
-                " Certificate: "+ this.certificate+","+
-                " Gross weight: "+ this.brutto_weight+","+
-                " Tare weight: "+ this.tare_weight+","+
-                " Net Weight: "+ this.nettoweight+","+
-                " Container ID: "+ this.container_ID;
+        return  " Type         : "+ this.container_type+";"+
+                " Container ID : "+ this.container_ID+"\n;"+
+                " Security info: "+ this.secure_info+";"+
+                "            Certificate  : "+ this.certificate+";\n"+
+                " Gross weight : "+ this.brutto_weight+";"+
+                "              Tare weight  : "+ this.tare_weight+";\n"+
+                " Net Weight   : "+ this.nettoweight+";"+
+                "              Sender info  : "+ this.sender_info+";\n";
     }
 
 }
