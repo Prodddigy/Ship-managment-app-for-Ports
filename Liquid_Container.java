@@ -12,8 +12,10 @@ public class Liquid_Container extends Standard_Container implements Liquidable_C
             }
         }
 
-
-
+    public Liquid_Container(String sender, String stuff, String cerificate, int brutto, int tare, String cargoname) {
+        super(sender,stuff,cerificate,brutto,tare,cargoname);
+        this.nettoweight = brutto_weight-tare_weight;
+    }
 
 
     public String toString()

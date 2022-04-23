@@ -1,8 +1,14 @@
 public class Toxic_Powder extends Heavy_Container{
 
+    public Toxic_Powder(String sender, String stuff, String cerificate, int brutto, int tare, String cargoname) {
+        super(sender,stuff,cerificate,brutto,tare,cargoname);
+        this.nettoweight = brutto_weight-tare_weight;
+    }
+
     Toxic_Powder(Ship chosenShip, String check)
     {
         super(chosenShip,check);
+
 
         this.container_type = "Toxic_Powder_Container";
 

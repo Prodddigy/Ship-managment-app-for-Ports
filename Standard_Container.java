@@ -43,12 +43,24 @@ public class Standard_Container {
 
    // static ArrayList<Standard_Container> containers ;
 
-public Standard_Container(Ship chosenship)
-{
 
-}
+    public Standard_Container(String sender_info, String secure_info, String certificate,
+                              int brutto_weight, int tare_weight,
+                               String container_type)
+    {
 
-    public Standard_Container(Ship chosenShip,String check) {
+        this.sender_info = sender_info;
+        this.secure_info = secure_info;
+        this.certificate = certificate;
+        this.brutto_weight = brutto_weight;
+        this.tare_weight = tare_weight;
+        this.container_ID =num_containers++;
+        this.container_type = container_type;
+        this.nettoweight = brutto_weight-tare_weight;
+
+    }
+
+    public Standard_Container(Ship chosenShip, String check) {
 
         Scanner scan3 = new Scanner(System.in);
 

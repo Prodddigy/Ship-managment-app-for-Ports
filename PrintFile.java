@@ -36,7 +36,14 @@ public class PrintFile
 
             Collections.sort(WareHouse.storage, WareHouse.ContainerCompareWarehouseDate);
             Collections.sort(WareHouse.storage,WareHouse.ContainerCompareWarehouseSender);
-
+            printWriter.println( "-------------------------------\n"+
+                    "Heavy : "+WareHouse.MaxHeavy_counter+"/"+WareHouse.MaxHeavy+"\n"+
+                    "Electric : "+WareHouse.MaxElec_counter+"/"+WareHouse.MaxElec+"\n"+
+                    "Liquid: "+WareHouse.MaxLiq_counter+"/"+WareHouse.MaxLiq+"\n"+
+                    "Toxic Liquid: "+WareHouse.MaxTL_counter+"/"+WareHouse.MaxTL+"\n"+
+                    "Toxic Powder: "+WareHouse.MaxTP_counter+"/"+WareHouse.MaxTP+"\n"+
+                    "Explosive: "+WareHouse.MaxExp_counter+"/"+WareHouse.MaxExp+"\n"+
+                    "-------------------------------");
             int counter=1;
             for(Standard_Container c : WareHouse.storage)
             {

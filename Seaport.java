@@ -164,10 +164,7 @@ public class Seaport {
                 System.out.println("Please choose type :)");
 
         }
-
-
     }
-
 
     public static void departureOfShip(String shipName)
     {

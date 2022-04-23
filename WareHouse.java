@@ -58,7 +58,7 @@ public class WareHouse
         MaxLiq = scan.nextInt();
     }
 
-    public static void moveContainerShip_WareHouse(String shipName) throws IrresponsibleSenderWithDangerousGoods {
+    public static void moveContainerShip_WareHouse(String shipName)  {
 
         Scanner scan = new Scanner(System.in);
 
@@ -76,7 +76,7 @@ public class WareHouse
             System.out.println("sorry, container not found :/");
     }
 
-   public static void moveToWareHouse(String shipName,Standard_Container cont) throws IrresponsibleSenderWithDangerousGoods {
+   public static void moveToWareHouse(String shipName,Standard_Container cont) {
 
        Ship tmpShip = Seaport.findShip(shipName);
        if(cont != null)
@@ -120,7 +120,7 @@ public class WareHouse
         }
     }
 
-    public static boolean checkOutCapacity(Standard_Container cont) throws IrresponsibleSenderWithDangerousGoods
+    public static boolean checkOutCapacity(Standard_Container cont)
     {
         if(Objects.equals(cont.getContainer_type(), "Standard Cargo")&& MaxStandard_counter+1 <= MaxStandard)
         {
@@ -157,12 +157,12 @@ public class WareHouse
             Thread TPDate = new Thread(() -> {
 
                     try {
-                        Thread.sleep(50000);
+                        Thread.sleep(70000);
 
                     } catch (InterruptedException e) {
 
                         return;
-                    }//sender interrupt
+                    }
                     try {
                         throw new IrresponsibleSenderWithDangerousGoods(
                                 cont.secure_info, cont.certificate, cont.brutto_weight, cont.tare_weight,
@@ -194,9 +194,6 @@ public class WareHouse
 
             cont.expirationDoc =TPDate;
 
-            //remove this and make an obj on IRRS
-            //method(cont.sender_info).numbrofcompains++;
-           // cont.expirationDate =TPDate;
 
                 return true;
         }
@@ -209,7 +206,7 @@ public class WareHouse
 
 
                     try {
-                        Thread.sleep(25000);
+                        Thread.sleep(50000);
                     } catch (InterruptedException e) {
                         return;
                     }
@@ -248,9 +245,10 @@ public class WareHouse
             MaxExp_counter++;
 
             Thread EXDate = new Thread(() -> {
-
+                    if(!Thread.interrupted())
+                    {
                     try {
-                        Thread.sleep(70000);
+                        Thread.sleep(25000);
                     } catch (InterruptedException e) {
                         return;
                     }
@@ -275,7 +273,8 @@ public class WareHouse
                         // complain.add(expCont);
                     }//sender interrupt
 
-            });
+            }});
+
             EXDate.start();
 
             cont.expirationDoc = EXDate;
@@ -308,16 +307,14 @@ public class WareHouse
             Standard_Container cont = whichContFromWareHouse(contID);
 
             if (cont != null) {
-                if (checkConstraints(contID, shipName)) {
+                if (checkConstraintsForMovingToShip(contID, shipName)) {
                     if (cont.getContainer_type() == "Explosive_Container"
                             || cont.getContainer_type() == "Toxic_Liquid"
                             || cont.getContainer_type() == "Toxic_Powder_Container")
                     {
                         cont.expirationDoc.interrupt();
                     }
-                    // System.out.println("stand after "+MaxStandard_counter);
-                    //increaseContCounter(cont);
-                    //System.out.println("stand before " + MaxStandard_counter);
+
 
                     Seaport.findShip(shipName).containers.add(cont);
 
@@ -340,7 +337,7 @@ public class WareHouse
         return null;
     }
 
-    public static boolean checkConstraints(int contID, String shipName)
+    public static boolean checkConstraintsForMovingToShip(int contID, String shipName)
     {
         boolean check = false;
 
@@ -482,5 +479,8 @@ public class WareHouse
         return sender2.compareTo(sender1);
 
     };
+
+
+
 
 }

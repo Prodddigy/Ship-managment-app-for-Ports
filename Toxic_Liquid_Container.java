@@ -22,6 +22,10 @@ public class Toxic_Liquid_Container extends Heavy_Container implements Liquidabl
             }
         }
     }
+    public Toxic_Liquid_Container(String sender, String stuff, String cerificate, int brutto, int tare, String cargoname) {
+        super(sender, stuff, cerificate, brutto, tare, cargoname);
+        this.nettoweight = brutto_weight-tare_weight;
+    }
 
     public String toString()
     {
