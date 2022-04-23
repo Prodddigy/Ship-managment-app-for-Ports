@@ -1,6 +1,4 @@
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 public class Main {
 
@@ -14,7 +12,9 @@ public class Main {
 
     public static void main(String[] args)  {
 
-
+//-------------------------------------------------------------------------------------------
+        // this Part is meant to be some default ships containers senders implemented in the app
+        // so it is not so empty
         Ship ship1  = new Ship();
         Ship ship2  = new Ship();
         Ship ship3  = new Ship();
@@ -81,7 +81,7 @@ public class Main {
                 "Max","stuff","cerificate",5,1,"Refrigerated_Container");
 
         Toxic_Powder cont8 = new Toxic_Powder(
-                "Max","stuff","cerificate",5,1,"Toxic_Powder");
+                "Max","stuff","cerificate",5,1,"Toxic_Powder_Container");
 
         ship1.containers.add(cont1);
         defaultContents( ship1,  cont1);
@@ -93,7 +93,7 @@ public class Main {
         defaultContents( ship3,  cont3);
 
         ship4.containers.add(cont4);
-        defaultContents( ship4,  cont4);
+       defaultContents( ship4,  cont4);
 
         ship5.containers.add(cont5);
         defaultContents( ship5,  cont5);
@@ -111,9 +111,12 @@ public class Main {
         WareHouse.storage.add(cont6);
         cont6.arrivalWarehouseDate= localDate;
         WareHouse.checkOutCapacity(cont6);
+
         WareHouse.storage.add(cont7);
         cont7.arrivalWarehouseDate= localDate;
         WareHouse.checkOutCapacity(cont7);
+//              end of default implementation of containers and ships and senders
+        //----------------------------------------------------------------------------------------------
 
         Thread changeDate = new Thread(() -> {
             while (!Thread.interrupted()) {
@@ -271,8 +274,19 @@ public class Main {
 
     public static void defaultContents(Ship ship, Standard_Container cont)
     {
-        ship.MAX_CAPACITY_counter += 1;
-        ship.MAX_WEIGHT_counter += cont.brutto_weight;
+        if(cont.container_type == "Liquid_Container" )
+        {
+            ship.MAX_WEIGHT_counter += cont.brutto_weight;
+            ship.MAX_CAPACITY_counter += 1;
+
+        }
+
+        if(cont.container_type == "Standard Cargo" )
+        {
+            ship.MAX_WEIGHT_counter += cont.brutto_weight;
+            ship.MAX_CAPACITY_counter += 1;
+        }
+
 
         if(cont.container_type == "Toxic_Powder" || cont.container_type == "Toxic_Liquid")
         {

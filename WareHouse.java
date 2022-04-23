@@ -245,8 +245,6 @@ public class WareHouse
             MaxExp_counter++;
 
             Thread EXDate = new Thread(() -> {
-                    if(!Thread.interrupted())
-                    {
                     try {
                         Thread.sleep(25000);
                     } catch (InterruptedException e) {
@@ -273,7 +271,7 @@ public class WareHouse
                         // complain.add(expCont);
                     }//sender interrupt
 
-            }});
+            });
 
             EXDate.start();
 
