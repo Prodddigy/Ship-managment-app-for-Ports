@@ -1,5 +1,7 @@
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -153,7 +155,7 @@ public class WareHouse
 
 
             Thread TPDate = new Thread(() -> {
-                while (!Thread.interrupted()) {
+
                     try {
                         Thread.sleep(50000);
 
@@ -173,17 +175,18 @@ public class WareHouse
                         if(send != null)
                         {
                             send.complain.add(f);
-                            cont.expDateTime = Main.localDate;
+                            f.expirationDate = Main.localDate;
                             storage.remove(cont);
                             MaxTP_counter--;
                             send.numOFComplains++;
 
                         }
+                        return;
 
             //cont.sender_info.
                         // complain.add(expCont);
                     }
-                }
+
             });
             //throw new IrresponsibleSenderWithDangerousGoods(cont.secure_info, cont.certificate, cont.brutto_weight, cont.tare_weight, cont.nettoweight, cont.container_ID, cont.container_type);
 
@@ -203,13 +206,15 @@ public class WareHouse
             MaxTL_counter++;
 
             Thread TLDate = new Thread(() -> {
-                while (!Thread.interrupted()) {
+
+
                     try {
                         Thread.sleep(25000);
                     } catch (InterruptedException e) {
                         return;
                     }
-                    try {
+                    try{
+
                         throw new IrresponsibleSenderWithDangerousGoods(
                                 cont.secure_info, cont.certificate, cont.brutto_weight, cont.tare_weight,
                                 cont.nettoweight, cont.container_ID, cont.container_type,
@@ -220,15 +225,16 @@ public class WareHouse
                         if(send != null)
                         {
                             send.complain.add(f);
-                            cont.expDateTime = Main.localDate;
+                            f.expirationDate = Main.localDate;
                             storage.remove(cont);
                             MaxTL_counter--;
                             send.numOFComplains++;
                         }
+                        return;
                         //cont.sender_info.
                         // complain.add(expCont);
                     }//sender interrupt
-                }
+
             });
 
             TLDate.start();
@@ -242,7 +248,7 @@ public class WareHouse
             MaxExp_counter++;
 
             Thread EXDate = new Thread(() -> {
-                while (!Thread.interrupted()) {
+
                     try {
                         Thread.sleep(70000);
                     } catch (InterruptedException e) {
@@ -259,15 +265,16 @@ public class WareHouse
                         if(send != null)
                         {
                             send.complain.add(f);
-                            cont.expDateTime = Main.localDate;
+                            f.expirationDate = Main.localDate;
                             storage.remove(cont);
                             MaxExp_counter--;
                             send.numOFComplains++;
                         }
+                        return;
                         //cont.sender_info.
                         // complain.add(expCont);
                     }//sender interrupt
-                }
+
             });
             EXDate.start();
 
@@ -455,5 +462,25 @@ public class WareHouse
             MaxLiq_counter--;
         }
     }
+
+    public static Comparator<Standard_Container> ContainerCompareWarehouseDate = (cont1, cont2) ->
+    {
+
+        LocalDate date1 = cont1.arrivalWarehouseDate;
+        LocalDate date2 = cont2.arrivalWarehouseDate;
+
+        return date2.compareTo(date1);
+
+    };
+    
+    public static Comparator<Standard_Container> ContainerCompareWarehouseSender = (cont1, cont2) ->
+    {
+
+        String sender1 = cont1.sender_info;
+        String sender2 = cont2.sender_info;
+
+        return sender2.compareTo(sender1);
+
+    };
 
 }

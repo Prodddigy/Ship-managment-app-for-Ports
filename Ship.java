@@ -158,18 +158,12 @@ public class Ship {
         return compare;
     }
 
-    public static Comparator<Ship> ShipCompare = (s1, s2) -> {
+    public static Comparator<Ship> ShipCompare = (ship1, ship2) ->
+    {
 
-        String shipName1
-                = s1.name;
-        String shipName2
-                = s2.name;
+        String shipName1 = ship1.name;
+        String shipName2 = ship2.name;
 
-        // ascending order
-        //return shipName1.compareTo(
-          //      shipName2);
-
-        // descending order
          return shipName2.compareTo(shipName1);
     };
 
@@ -179,11 +173,9 @@ public class Ship {
         int weight1 = cont1.brutto_weight;
         int weight2 = cont2.brutto_weight;
 
-        // For ascending order
+
         return weight1 - weight2;
 
-        // For descending order
-        // weight2-weight1;
     };
 public String toString()
 {

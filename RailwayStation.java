@@ -6,7 +6,7 @@ public class RailwayStation
 {
     static ArrayList<Standard_Container> train = new ArrayList<>();
 
-    public static void moveToTrain() throws InterruptedException {
+    public static void moveToTrain() {
 
         Scanner scan = new Scanner(System.in);
         System.out.println("Contents of WareHouse");
@@ -31,7 +31,7 @@ public class RailwayStation
         else
             System.out.println("no such container in WareHouse :/ \n");
 
-        if(train.size() == 1)
+        if(train.size() == 10)
         {
             departure();
         }
@@ -42,7 +42,8 @@ public class RailwayStation
         cont.expirationDoc.interrupt();
     }
 
-    public static void departure() throws InterruptedException {
+    public static void departure()
+    {
         //wait 30 secs and clear
         Thread TrainDep = new Thread(() -> {
 
@@ -75,4 +76,8 @@ public class RailwayStation
             System.out.println(i+"."+train.get(i).toString());
         }
     }
+
+
+
+
 }

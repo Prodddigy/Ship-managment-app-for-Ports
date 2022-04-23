@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static java.util.List.of;
+
 
 public class Sender
 {
@@ -39,8 +39,12 @@ public class Sender
         senders.add(this);
         //numOFComplains++;
 
-        this.month = Integer.parseUnsignedInt(Smonth);
-        this.day = Integer.parseUnsignedInt(Sday);
+        this.month = Integer.parseUnsignedInt(month);
+        this.day = Integer.parseUnsignedInt(day);
+        if(month.length()!=2)
+        {
+            Smonth= "0"+month;
+        }
 
        // this.DOB = of(int year,int month,int day);
 
@@ -80,17 +84,19 @@ public class Sender
 
         Syear= Syear.substring(2,4);
 
-        pesel =Syear+Smonth+Sday;
+         int rand= (int) (Math.random()*9999+10000);;
+
+        pesel = Syear + Smonth + Sday + rand;
     }
 
     @Override
     public String toString() {
-        return "Name: " + senderName + '\n' +
+        return "----------------------------------------------\n"+
+                "Name: " + senderName + '\n' +
                 "Surname: " + senderSurname + '\n' +
                 "Address: " + adress + '\n' +
                 "DOB: " + year+ "."+Smonth+"."+ Sday+"."+ '\n' +
                 "PESEL: " + pesel + '\n' +
-                "Complains: " + numOFComplains + '\n' +
-                "----------------------------------------------";
+                "Complains: " + numOFComplains + '\n';
     }
 }

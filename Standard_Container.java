@@ -43,7 +43,10 @@ public class Standard_Container {
 
    // static ArrayList<Standard_Container> containers ;
 
+public Standard_Container(Ship chosenship)
+{
 
+}
 
     public Standard_Container(Ship chosenShip,String check) {
 
@@ -93,19 +96,12 @@ public class Standard_Container {
             System.out.println("sorry too heavy or too many containers already");
         }
 
-        if(Sender.findSender(sender_info) == null)
+        if(Sender.findSender(sender_info) == null || Sender.findSender(sender_info).numOFComplains ==2)
         {
             chosenShip.containers.remove(this);
-            System.out.println("No such a sender, removing... :^( \n");
-        }
-        else if(Sender.findSender(sender_info).numOFComplains ==2)
-        {
-            System.out.println("This sender "+sender_info+" appears to be blacklisted, removing container...\n");
-            chosenShip.containers.remove(this);
-        }
-        else
-        {
-            //then it's fine move on
+            System.out.println("No such a sender or sender is blacklisted, removing... :^( \n");
+
+            return;
         }
 
         if(check == "Standard_Container"&& Sender.findSender(sender_info) != null)
@@ -113,6 +109,8 @@ public class Standard_Container {
             chosenShip.MAX_CAPACITY_counter += 1;
             chosenShip.MAX_WEIGHT_counter += this.brutto_weight;
         }
+
+
     }
 
     public String getContainer_type() {
@@ -123,13 +121,13 @@ public class Standard_Container {
     {
         return  "--------------------------------------------------------\n"+
                 " Type         : "+ this.container_type+";"+
-                " Container ID : "+ this.container_ID+";\n"+
+                "                 Container ID : "+ this.container_ID+";\n"+
                 " Security info: "+ this.secure_info+";"+
-                "           Certificate  : "+ this.certificate+";\n"+
+                "                                   Certificate  : "+ this.certificate+";\n"+
                 " Gross weight : "+ this.brutto_weight+";"+
-                "              Tare weight  : "+ this.tare_weight+";\n"+
+                "                                     Tare weight  : "+ this.tare_weight+";\n"+
                 " Net Weight   : "+ this.nettoweight+";"+
-                "              Sender info  : "+ this.sender_info+";\n";
+                "                                     Sender info  : "+ this.sender_info+";\n";
     }
 
 }

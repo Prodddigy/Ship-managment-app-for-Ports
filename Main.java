@@ -40,7 +40,11 @@ public class Main {
         ship3.setHome_port("Calagari"); ship3.setDestination("Poland"); ship3.setMax_tox_or_exp(3);
         ship3.setTransport_origin("Calagari");
 
+
+        Sender sen2 = new Sender("Cole","Smith","Warszawa", 1990,"12","1");
+        Sender sen3 = new Sender("Max","Kowalski","Kraków", 2003,"7","8");
         Sender sen1 = new Sender("Ola","Bialik","Częstochowa", 2001,"4","26");
+
         /*
 
         System.out.println("Standard test \n" );
@@ -172,7 +176,6 @@ public class Main {
                     System.out.println("Loading...");
                     PrintFile.printShips();
 
-
                     break;
                 }
 
@@ -185,7 +188,6 @@ public class Main {
                     loop = false;
                     break;
                 }
-
 
                 default: {
 
