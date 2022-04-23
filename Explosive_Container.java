@@ -6,7 +6,7 @@ public class Explosive_Container extends Standard_Container{
 
         this.container_type = "Explosive_Container";
 
-        if(check == "Explosive_Container")
+        if(check == "Explosive_Container" && Sender.findSender(sender_info) != null)
         {
             if(chosenShip.max_tox_or_exp < 1+ chosenShip.max_tox_or_exp_counter)
             {
@@ -24,10 +24,11 @@ public class Explosive_Container extends Standard_Container{
 
     public String toString()
     {
-        return  " Type         : "+ this.container_type+";"+
-                " Container ID : "+ this.container_ID+"\n;"+
+        return  "--------------------------------------------------------\n"+
+                " Type         : "+ this.container_type+";"+
+                " Container ID : "+ this.container_ID+";\n"+
                 " Security info: "+ this.secure_info+";"+
-                "            Certificate  : "+ this.certificate+";\n"+
+                "           Certificate  : "+ this.certificate+";\n"+
                 " Gross weight : "+ this.brutto_weight+";"+
                 "              Tare weight  : "+ this.tare_weight+";\n"+
                 " Net Weight   : "+ this.nettoweight+";"+

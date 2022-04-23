@@ -5,7 +5,7 @@ public class Liquid_Container extends Standard_Container implements Liquidable_C
         super(chosenShip,check);
         this.container_type = "Liquid_Container";
 
-        if(check == "Liquid_Container")
+        if(check == "Liquid_Container" && Sender.findSender(sender_info) != null)
         {
                 chosenShip.MAX_WEIGHT_counter += this.brutto_weight;
                 chosenShip.MAX_CAPACITY_counter += 1;
@@ -18,10 +18,11 @@ public class Liquid_Container extends Standard_Container implements Liquidable_C
 
     public String toString()
     {
-        return  " Type         : "+ this.container_type+";"+
-                " Container ID : "+ this.container_ID+"\n;"+
+        return  "--------------------------------------------------------\n"+
+                " Type         : "+ this.container_type+";"+
+                " Container ID : "+ this.container_ID+";\n"+
                 " Security info: "+ this.secure_info+";"+
-                "            Certificate  : "+ this.certificate+";\n"+
+                "           Certificate  : "+ this.certificate+";\n"+
                 " Gross weight : "+ this.brutto_weight+";"+
                 "              Tare weight  : "+ this.tare_weight+";\n"+
                 " Net Weight   : "+ this.nettoweight+";"+

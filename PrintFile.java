@@ -1,30 +1,34 @@
-import java.awt.*;
+
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Collections;
-import java.util.Comparator;
 
-public class PrintFile {
+
+public class PrintFile
+{
+
+
 
     public static void printShips()
     {
         try {
             PrintWriter printWriter = new PrintWriter("file.txt");
 
-            Ship.ships.sort((ship1, ship2)
-                    -> ship1.getName().compareTo(
-                    ship2.getName()));
+            Collections.sort(Ship.ships,
+                    Ship.ShipCompare);
+
 
             for (Ship s : Ship.ships)
             {
+                int counter=1;
                 printWriter.println(s);
-                /*
-                s.containers.sort((cont1, cont2)
-                        -> cont1.brutto_weight.compareTo(
-                        cont2.brutto_weight));
-                        
-                 */
-
+                printWriter.println("Contents of ship: "+s.getName());
+                Collections.sort(s.containers, Ship.ContainerCompare);
+                for (Standard_Container c : s.containers)
+                {
+                    printWriter.print(counter++ +". ");
+                    printWriter.println(c);
+                }
             }
 
             printWriter.close();
@@ -34,3 +38,10 @@ public class PrintFile {
 
     }
 }
+/*
+Containers stored in the warehouse should be sorted in descending order according to thestorage start date
+ (from the longest stored to the shortest),
+ and if the storage time is thesame, the next sorting criterion is the sender’s name.
+
+ such as data ofsenders, ships, warehouse, containers and the complete set of information about them
+ */

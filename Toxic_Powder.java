@@ -5,7 +5,7 @@ public class Toxic_Powder extends Heavy_Container{
         super(chosenShip,check);
         this.container_type = "Toxic_Powder_Container";
 
-        if(check == "Toxic_Powder")
+        if(check == "Toxic_Powder" && Sender.findSender(sender_info) != null)
         {
             if(chosenShip.max_tox_or_exp < 1+ chosenShip.max_tox_or_exp_counter)
             {
@@ -23,10 +23,11 @@ public class Toxic_Powder extends Heavy_Container{
 
     public String toString()
     {
-        return  " Type         : "+ this.container_type+";"+
-                " Container ID : "+ this.container_ID+"\n;"+
+        return  "--------------------------------------------------------\n"+
+                " Type         : "+ this.container_type+";"+
+                " Container ID : "+ this.container_ID+";\n"+
                 " Security info: "+ this.secure_info+";"+
-                "            Certificate  : "+ this.certificate+";\n"+
+                "           Certificate  : "+ this.certificate+";\n"+
                 " Gross weight : "+ this.brutto_weight+";"+
                 "              Tare weight  : "+ this.tare_weight+";\n"+
                 " Net Weight   : "+ this.nettoweight+";"+

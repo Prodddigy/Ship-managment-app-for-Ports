@@ -15,7 +15,7 @@ public class Heavy_Container extends Standard_Container{
        // System.out.println("it hit heavy" + check);
 
 
-        if(check == "Heavy_Container")
+        if(check == "Heavy_Container" && Sender.findSender(sender_info) != null)
         {
             if(chosenShip.max_heavy < 1+ chosenShip.max_heavy_counter)
             {
@@ -35,10 +35,11 @@ public class Heavy_Container extends Standard_Container{
 
     public String toString()
     {
-        return  " Type         : "+ this.container_type+";"+
-                " Container ID : "+ this.container_ID+"\n;"+
+        return  "--------------------------------------------------------\n"+
+                " Type         : "+ this.container_type+";"+
+                " Container ID : "+ this.container_ID+";\n"+
                 " Security info: "+ this.secure_info+";"+
-                "            Certificate  : "+ this.certificate+";\n"+
+                "           Certificate  : "+ this.certificate+";\n"+
                 " Gross weight : "+ this.brutto_weight+";"+
                 "              Tare weight  : "+ this.tare_weight+";\n"+
                 " Net Weight   : "+ this.nettoweight+";"+

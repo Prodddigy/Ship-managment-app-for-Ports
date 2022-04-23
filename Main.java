@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 public class Main {
@@ -83,7 +84,7 @@ public class Main {
         boolean loop = true;
         do {
 
-            System.out.println("1 2 3 4");
+            System.out.println("Current Date: "+localDate);
             System.out.println("1. Create a ship");
             System.out.println("2. Create container");
             System.out.println("3. Show containers from a certain Ship");
@@ -92,7 +93,7 @@ public class Main {
             System.out.println("6. Move containers From WareHouse To RailWay Station");
             System.out.println("7. Show contents of WareHouse");
             System.out.println("8. Make a departure of a ship");
-            System.out.println("9. check current date");
+            System.out.println("9. Print file and save progress");
             System.out.println("10. Quit");
             int menu = scan.nextInt();
 
@@ -117,6 +118,7 @@ public class Main {
                 case 3: {
 
                     System.out.println("Loading...");
+                   // Collections.sort(ship1.containers, Ship.ContainerCompare);
                     Ship.whichShipShow();
 
                     break;
@@ -167,7 +169,8 @@ public class Main {
 
 
                 case 9: {
-                    System.out.println("current date: "+localDate);
+                    System.out.println("Loading...");
+                    PrintFile.printShips();
 
 
                     break;

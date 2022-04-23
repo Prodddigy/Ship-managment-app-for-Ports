@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -156,6 +157,48 @@ public class Ship {
         }
         return compare;
     }
+
+    public static Comparator<Ship> ShipCompare = (s1, s2) -> {
+
+        String shipName1
+                = s1.name;
+        String shipName2
+                = s2.name;
+
+        // ascending order
+        //return shipName1.compareTo(
+          //      shipName2);
+
+        // descending order
+         return shipName2.compareTo(shipName1);
+    };
+
+    public static Comparator<Standard_Container> ContainerCompare = (cont1, cont2) ->
+    {
+
+        int weight1 = cont1.brutto_weight;
+        int weight2 = cont2.brutto_weight;
+
+        // For ascending order
+        return weight1 - weight2;
+
+        // For descending order
+        // weight2-weight1;
+    };
+public String toString()
+{
+    return "-------------------------------\n"+
+   "Name: "+this.name+"\n"+
+   "ID: "+this.getShip_ID()+"\n"+
+    "Heavy max: "+this.max_heavy_counter+"/"+this.max_heavy+"\n"+
+    "Electric Max: "+this.max_electro_counter+"/"+this.max_electro+"\n"+
+    "Toxic/Exp: "+this.max_tox_or_exp_counter+"/"+this.max_tox_or_exp+"\n"+
+    "Weight: "+this.MAX_WEIGHT_counter+"/"+this.MAX_WEIGHT+"\n"+
+    "Capacity: "+this.MAX_CAPACITY_counter+"/"+this.MAX_CAPACITY+"\n"+
+    "-------------------------------";
+}
+
+
     /*Write an application that will be used to manage the logistics of a seaport in terms of a
 transhipment terminal for container ships. The application will be used to unload and load containers
 from/to the ship. In case of unloading, the containers can be transferred to the warehouse
